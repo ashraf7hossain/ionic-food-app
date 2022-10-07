@@ -36,7 +36,12 @@ export class HomePage implements OnInit{
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
-
+  slideOptions = {
+    // slidesPerView: 1.5,
+    // centeredSlides: true,
+    loop: true,
+    spaceBetween: 10,
+  }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
   }

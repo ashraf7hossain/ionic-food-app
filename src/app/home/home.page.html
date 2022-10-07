@@ -1,24 +1,43 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>Ionic Foods</ion-title>
-    <ion-button color = "light" slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-button>
-  </ion-toolbar>
+  <div class="header-section">
+    <ion-toolbar>
+      <ion-title>Ionic Foods</ion-title>
+      <ion-button class="menu-btn" slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-button>
+    </ion-toolbar>
+  </div>
 </ion-header>
 
 
 <ion-item>
-  <ion-button color = "danger">
+  <ion-button color="primary">
     <ion-icon name="filter"></ion-icon>
   </ion-button>
 </ion-item>
 
+
+<ion-content>
+  <ion-slides [options] = "slideOptions">
+    <ion-slide *ngFor="let product of products">
+      <img [src]="product.img" />
+      <div class="product-info">
+        <h3> {{product.name}} </h3>
+        <h5> ${{product.price}} </h5>
+      </div>
+    </ion-slide>
+  </ion-slides>
+</ion-content>
+
+
+<ion-item class="search-item">
+  <ion-icon slot="end" name="search"></ion-icon>
+  <ion-input #search type="text"></ion-input>
+</ion-item>
+
+<!-- all products list -->
 <ion-content>
   <ion-list>
-    <ion-item>
-      <ion-input #search type="text"></ion-input>
-    </ion-item>
     <ion-card *ngFor="let product of products">
       <ion-grid *ngIf="search === '' || product.name.toLowerCase().includes(search.value.toLowerCase())">
         <ion-row>
@@ -37,7 +56,7 @@
           </ion-col>
           <ion-col size="6">
             <img src={{product.img}} alt="">
-            <ion-fab-button (click)="addToCart(product)" color="danger">
+            <ion-fab-button (click)="addToCart(product)" color="primary">
               <ion-icon name="add"></ion-icon>
             </ion-fab-button>
           </ion-col>
@@ -46,13 +65,18 @@
     </ion-card>
   </ion-list>
 </ion-content>
+<!-- all products list ends -->
+
+
+<!-- cart icon and its work -->
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button id = "open-modal" color="danger">
+  <ion-fab-button id="open-modal" color="primary">
     <span *ngIf="cart.length > 0" style="color:aliceblue;margin-top: -10px"> {{ cart.length }} </span>
     <ion-icon name="cart">
     </ion-icon>
   </ion-fab-button>
 </ion-fab>
+<!-- cart icon and its work end -->
 
 <!-- modal -->
 <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
@@ -62,17 +86,17 @@
         <ion-buttons slot="start">
           <ion-button (click)="cancel()">Cancel</ion-button>
         </ion-buttons>
-        <ion-title color = "danger"> Your Cart </ion-title>
+        <ion-title color="primary"> Your Cart </ion-title>
         <ion-buttons slot="end">
           <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
     <ion-content class="ion-padding">
-      <ion-item *ngFor = "let order of cart">
+      <ion-item *ngFor="let order of cart">
         {{order.name}}
         <ion-button>
-          <ion-icon name = "remove"></ion-icon>
+          <ion-icon name="remove"></ion-icon>
         </ion-button>
       </ion-item>
     </ion-content>

@@ -11,6 +11,11 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'display/:search',
+    loadChildren: () => import('./display/display.module').then( m => m.DisplayPageModule)
+  },
+
 ];
 
 @NgModule({

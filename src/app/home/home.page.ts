@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { Router } from '@angular/router';
 // import { Observable, map, BehaviorSubject} from 'rxjs';
 
 @Component({
@@ -21,7 +22,7 @@ export class HomePage implements OnInit{
   catagories: any[];
   name:string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router:Router) {}
 
   ngOnInit(){
    this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
@@ -41,6 +42,8 @@ export class HomePage implements OnInit{
    });
 
   }
+
+
   addToCart(item:any){
     this.cart.push(item);
   }
@@ -59,6 +62,12 @@ export class HomePage implements OnInit{
 
   onWillDismiss(event: Event) {
     
+  }
+
+  onSearch(value:any){
+    console.log(value);
+    this.router.navigate(['/display', value]);
+
   }
 
 }

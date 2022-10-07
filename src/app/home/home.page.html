@@ -13,7 +13,7 @@
 </ion-header>
 
 
-<ion-item>
+<ion-item style="height: 25%;">
   <ion-slides [options] = "slideOptions">
     <ion-slide *ngFor="let slider of sliders">
       <img style="width: 100%;" [src]="slider.imageURL" />
@@ -22,6 +22,14 @@
 </ion-item>
 
 
+<h3 style="text-align: center; color:blueviolet; font-weight: bold; margin-top: 15px;" >Catagories</h3>
+<ion-item style="margin-top: 2px; height: 25%;">
+  <ion-slides [options] = "slideOptions">
+    <ion-slide *ngFor="let catagory of catagories">
+      <img style="width: 100%;" [src]="catagory.imageURL" />
+    </ion-slide>
+  </ion-slides>
+</ion-item>
 
 
 <!-- Trending Product List -->

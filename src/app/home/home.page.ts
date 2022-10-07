@@ -18,7 +18,7 @@ export class HomePage implements OnInit{
   trendingProdducts:any[] = [];
   sliders: any[] = [];
   cart:any[] = [];
-  message = "hello world";
+  catagories: any[];
   name:string;
 
   constructor(private http: HttpClient) {}
@@ -34,7 +34,10 @@ export class HomePage implements OnInit{
 
    this.http.get<any[]>(`http://localhost:3030/sliders`).subscribe( (res:any) =>{
      this.sliders = res.data;
-  
+   });
+
+   this.http.get<any[]>(`http://localhost:3030/catagories`).subscribe( (res:any) =>{
+     this.catagories = res.data;
    });
 
   }
@@ -55,10 +58,7 @@ export class HomePage implements OnInit{
   }
 
   onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
+    
   }
 
 }

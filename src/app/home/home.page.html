@@ -1,45 +1,35 @@
 <ion-header>
   <div class="header-section">
     <ion-toolbar>
-      <ion-title>Ionic Foods</ion-title>
       <ion-button class="menu-btn" slot="start">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-button>
+      <ion-item class="search-item">
+        <ion-icon slot="end" name="search"></ion-icon>
+        <ion-input #search type="text"></ion-input>
+      </ion-item>
     </ion-toolbar>
   </div>
 </ion-header>
 
 
 <ion-item>
-  <ion-button color="primary">
-    <ion-icon name="filter"></ion-icon>
-  </ion-button>
-</ion-item>
-
-
-<ion-content>
   <ion-slides [options] = "slideOptions">
-    <ion-slide *ngFor="let product of products">
-      <img [src]="product.img" />
-      <div class="product-info">
-        <h3> {{product.name}} </h3>
-        <h5> ${{product.price}} </h5>
-      </div>
+    <ion-slide *ngFor="let slider of sliders">
+      <img style="width: 100%;" [src]="slider.imageURL" />
     </ion-slide>
   </ion-slides>
-</ion-content>
-
-
-<ion-item class="search-item">
-  <ion-icon slot="end" name="search"></ion-icon>
-  <ion-input #search type="text"></ion-input>
 </ion-item>
 
-<!-- all products list -->
+
+
+
+<!-- Trending Product List -->
+<h3 style="text-align: center; color:blueviolet; font-weight: bold;" >Trending </h3>
 <ion-content>
   <ion-list>
-    <ion-card *ngFor="let product of products">
-      <ion-grid *ngIf="search === '' || product.name.toLowerCase().includes(search.value.toLowerCase())">
+    <ion-card *ngFor="let product of trendingProdducts">
+      <ion-grid >
         <ion-row>
           <ion-col size="6">
             <ion-card-header>
@@ -47,15 +37,15 @@
                 {{ product.name }}
               </ion-card-title>
               <ion-card-subtitle>
-                Available Units: {{ product.available }}
+                Available Units: {{ product.stockAvailable }}
               </ion-card-subtitle>
               <ion-card-subtitle>
-                ${{ product.price }}
+                ${{ product.unitPrice }}
               </ion-card-subtitle>
             </ion-card-header>
           </ion-col>
           <ion-col size="6">
-            <img src={{product.img}} alt="">
+            <img src={{product.imageURL}} alt="">
             <ion-fab-button (click)="addToCart(product)" color="primary">
               <ion-icon name="add"></ion-icon>
             </ion-fab-button>

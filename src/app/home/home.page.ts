@@ -15,6 +15,8 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
+  trendingProdducts:any[] = [];
+  sliders: any[] = [];
   cart:any[] = [];
   message = "hello world";
   name:string;
@@ -22,13 +24,19 @@ export class HomePage implements OnInit{
   constructor(private http: HttpClient) {}
 
   ngOnInit(){
-   this.http.get<any[]>(`${environment.baseURL}/products.json`).subscribe(res =>{
-     let arr = Object.entries(res);
-    for(let [x,y] of arr){
-      this.products.push(y);
-    }
-    console.log(this.products);
+   this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
+     this.products = res.data;
+     for(let pr of this.products){
+        if( pr.isTrending )
+            this.trendingProdducts.push( pr );
+     }
+  });
+
+   this.http.get<any[]>(`http://localhost:3030/sliders`).subscribe( (res:any) =>{
+     this.sliders = res.data;
+  
    });
+
   }
   addToCart(item:any){
     this.cart.push(item);
@@ -37,7 +45,7 @@ export class HomePage implements OnInit{
     this.modal.dismiss(null, 'cancel');
   }
   slideOptions = {
-    // slidesPerView: 1.5,
+    slidesPerView: 1.5,
     // centeredSlides: true,
     loop: true,
     spaceBetween: 10,

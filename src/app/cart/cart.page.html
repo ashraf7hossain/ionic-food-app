@@ -12,13 +12,10 @@
   </div>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf=" totalAddedProduct">
+  
   <ion-list>
-    <ion-item>
-        <h5 style="font-weight: bold;">Product</h5>
-        <h5 style="margin-left: 4rem; font-weight: bold;">Quantity</h5>
-        <h5  style="margin-left: 3rem;font-weight: bold;">Subtotal</h5>
-    </ion-item>
+  
 
     <ion-item *ngFor="let cp of cartProducts">
         <ion-avatar>
@@ -26,13 +23,16 @@
         </ion-avatar>
       {{cp.name}}
 
-      <div style="margin: 0 2rem;">
-        <ion-icon name="add-outline"></ion-icon>
+      <div style="margin-left: 2rem;">
+      
+        <ion-icon name="remove-outline" (click)="minusQuantity(cp)"></ion-icon>
         {{cp.quantity}}
-        <ion-icon name="remove-outline" style="font-weight: bold;"></ion-icon>
+        <ion-icon name="add-outline" (click)="addQuantity(cp)"></ion-icon>
+       
       </div>
 
-      <div slot="end">{{cp.subtotal}}</div>
+      <div >{{cp.subtotal}}</div>
+      <ion-icon name='trash' slot="end"  (click)="deleteCartProduct(cp)"></ion-icon>
      
     </ion-item>
   
@@ -44,6 +44,13 @@
       <h5 style="font-weight: bold;">Grand Total:  <span  style="color: rgb(234, 11, 234);">{{ grandTotal }}</span></h5> 
   </div>
 
+</ion-content>
+
+
+<ion-content  *ngIf="!totalAddedProduct">
+     <div style="text-align: center; color:red; margin-top:3rem;">
+           <h1>No Cart Products!!</h1>
+     </div>
 </ion-content>
 
 

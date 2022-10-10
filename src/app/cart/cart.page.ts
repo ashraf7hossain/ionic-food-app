@@ -42,4 +42,51 @@ export class CartPage implements OnInit {
     this.router.navigate(['/display', value]);
   }
 
+  addQuantity(cartProduct:any){
+    this.totalAddedProduct++;
+    for(let cp  of this.cartProducts){
+      if(cp._id == cartProduct._id){ 
+          cp.quantity++;
+          cp.subtotal = +cp.unitPrice  +  +cp.subtotal;
+          this.total += +cp.unitPrice;
+          this.grandTotal += +cp.unitPrice;  
+          this.cartApi.editCartProduct(cartProduct._id, cp).subscribe(); 
+         // console.log("Akn cart", this.auth.getUser());
+          return; 
+      }
+    }
+  }
+
+  minusQuantity(cartProduct:any){
+    if( cartProduct.quantity == 1){
+        this.deleteCartProduct(cartProduct);
+        return;
+    }
+    this.totalAddedProduct--;
+    for(let cp  of this.cartProducts){
+      if(cp._id == cartProduct._id){ 
+          cp.quantity--;
+          cp.subtotal =  +cp.subtotal -  +cp.unitPrice;  
+          this.total -= +cp.unitPrice;
+          this.grandTotal -= +cp.unitPrice;
+          this.cartApi.editCartProduct(cartProduct._id, cp).subscribe(); 
+          return; 
+      }
+    }
+
+  }
+
+  deleteCartProduct(cartProduct:any){
+    
+      this.total -= +cartProduct.subtotal;
+      this.grandTotal -= +cartProduct.subtotal;
+      this.totalAddedProduct -= +cartProduct.quantity;
+
+      this.cartApi.deleteCartProduct(cartProduct).subscribe(); //external server theke delete
+      const indexOfObject = this.cartProducts.findIndex((object) => {
+        return object === cartProduct;
+      });  
+      this.cartProducts.splice(indexOfObject, 1);//internal array theke delete*/
+  }
+
 }

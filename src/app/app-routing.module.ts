@@ -30,7 +30,11 @@ const routes: Routes = [
   {
     path: 'payment',
     loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+  },  {
+    path: 'myorder',
+    loadChildren: () => import('./myorder/myorder.module').then( m => m.MyorderPageModule)
   },
+
 
 
 ];

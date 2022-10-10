@@ -26,7 +26,7 @@
 <ion-item style="margin-top: 2px; height: 25%;">
   <ion-slides [options] = "slideOptions">
     <ion-slide *ngFor="let catagory of catagories">
-      <img style="width: 100%;" [src]="catagory.imageURL" />
+      <img style="width: 100%;" [src]="catagory.imageURL" (click)="onSearch( catagory.name  )" />
     </ion-slide>
   </ion-slides>
 </ion-item>

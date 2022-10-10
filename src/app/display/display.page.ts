@@ -26,11 +26,11 @@ export class DisplayPage implements OnInit {
     if( this.searchedPr ){
       this.http.get<any[]>(`http://localhost:3030/products`).subscribe(  (res:any)=>{
            products = res.data;
-           console.log("PPPPPP:   ", products);
+          
            for(let pr of products){
                if( pr.name.includes(this.searchedPr) )this.displayProducts.push(pr);
+               if( pr.catagory.includes(this.searchedPr) )this.displayProducts.push(pr);
            }
-           console.log("Vallll:", this.displayProducts);
        })   
     }
   }

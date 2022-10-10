@@ -70,9 +70,7 @@ export class HomePage implements OnInit{
   }
 
 
-  onWillDismiss(event: Event) {
-    
-  }
+
 
   onSearch(value:any){
     console.log(value);

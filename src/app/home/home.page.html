@@ -4,7 +4,7 @@
       <ion-button class="menu-btn" slot="start">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-button>
-      <ion-item class="search-item">
+      <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
         <ion-input #search type="text" ></ion-input>
         <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
       </ion-item>
@@ -67,36 +67,12 @@
 
 
 <!-- cart icon and its work -->
-<ion-fab vertical="bottom" horizontal="end" slot="fixed">
-  <ion-fab-button id="open-modal" color="primary">
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary">
     <span *ngIf="cart.length > 0" style="color:aliceblue;margin-top: -10px"> {{ cart.length }} </span>
-    <ion-icon name="cart">
+    <ion-icon name="cart" (click)="onCart()">
     </ion-icon>
   </ion-fab-button>
 </ion-fab>
 <!-- cart icon and its work end -->
 
-<!-- modal -->
-<ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
-  <ng-template>
-    <ion-header>
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-button (click)="cancel()">Cancel</ion-button>
-        </ion-buttons>
-        <ion-title color="primary"> Your Cart </ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="confirm()" [strong]="true">Confirm</ion-button>
-        </ion-buttons>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding">
-      <ion-item *ngFor="let order of cart">
-        {{order.name}}
-        <ion-button>
-          <ion-icon name="remove"></ion-icon>
-        </ion-button>
-      </ion-item>
-    </ion-content>
-  </ng-template>
-</ion-modal>

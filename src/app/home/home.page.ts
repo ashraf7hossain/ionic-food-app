@@ -47,18 +47,19 @@ export class HomePage implements OnInit{
   addToCart(item:any){
     this.cart.push(item);
   }
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
+ 
   slideOptions = {
     slidesPerView: 1.5,
     // centeredSlides: true,
     loop: true,
     spaceBetween: 10,
   }
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+
+  onCart(){
+    console.log("Asce ekhane!!");
+    this.router.navigate(['/cart']);
   }
+
 
   onWillDismiss(event: Event) {
     

@@ -42,6 +42,10 @@ export class CartPage implements OnInit {
     this.router.navigate(['/display', value]);
   }
 
+  onConfirm(){
+    this.router.navigate(['/payment',]);
+  }
+
   addQuantity(cartProduct:any){
     this.totalAddedProduct++;
     for(let cp  of this.cartProducts){

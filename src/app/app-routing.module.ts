@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'display/:search',
     loadChildren: () => import('./display/display.module').then( m => m.DisplayPageModule)
-  },  {
+  },
+  {
     path: 'register',
     loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
   },
@@ -25,6 +26,10 @@ const routes: Routes = [
   {
     path: 'cart',
     loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
   },
 
 

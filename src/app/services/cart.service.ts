@@ -30,7 +30,7 @@ export class CartService {
   }
 
   editCartProduct(id: any, cp:any):any {
-    console.log(id);
+    console.log("tiku:..", id);
     const url = `${this.apiUrl}/${id}`;
     return this.http.put<any>(url, cp, httpOptions);
   }

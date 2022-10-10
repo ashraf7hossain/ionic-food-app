@@ -10,9 +10,9 @@ export default {
     find: [  ],
     get: [ ],
     create: [ ],
-    update: [ authenticate('jwt') ],
-    patch: [ authenticate('jwt') ],
-    remove: [ authenticate('jwt') ]
+    update: [  ],
+    patch: [ ],
+    remove: [ ]
   },
 
   after: {

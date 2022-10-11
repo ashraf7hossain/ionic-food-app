@@ -19,7 +19,7 @@
 
       <ion-card *ngFor="let cat of catagories">
         <ion-grid >
-          <ion-row>
+          <ion-row (click)="onSearch(cat.name)">
             <ion-col size="6">
               <ion-card-header>
                 <ion-card-title>

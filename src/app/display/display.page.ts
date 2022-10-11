@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import { Router } from '@angular/router';
 import { ProductApiService } from 'services/product-api.service';
+import { CartService } from '../services/cart.service';
+import { AuthorizationService } from 'services/authorization.service';
 
 
 @Component({
@@ -13,8 +15,11 @@ import { ProductApiService } from 'services/product-api.service';
 export class DisplayPage implements OnInit {
 
   searchedPr:string;
+  totalAddedProduct: number = 0;
   displayProducts: any[] = [];
   constructor(private router:Router, private route:ActivatedRoute,
+    private auth:AuthorizationService,
+    private cartApi:CartService,
         private http: HttpClient  ) { }
 
 
@@ -36,6 +41,17 @@ export class DisplayPage implements OnInit {
   }
 
   ngOnInit() {
+    let allCartProducts:any[] = [];
+    this.cartApi.getCartProducts().subscribe( (response:any)=>{ 
+      allCartProducts = response.data;
+      for(let cp of allCartProducts){
+         if( cp.userID == this.auth.getUserPayload().sub){
+           
+             this.totalAddedProduct += +cp.quantity;
+           
+         }
+      } 
+    });   
      this.searchAction();
   }
 

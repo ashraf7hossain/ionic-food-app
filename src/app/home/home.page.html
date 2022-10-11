@@ -7,7 +7,13 @@
       <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
         <ion-input #search type="text" ></ion-input>
         <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
+       
       </ion-item>
+
+      
+
+
+    
     </ion-toolbar>
   </div>
 </ion-header>
@@ -50,9 +56,10 @@
 <!-- cart icon and its work -->
 <ion-fab vertical="top" horizontal="end" slot="fixed">
   <ion-fab-button color="primary">
-    <span style="color:aliceblue;margin-top: -10px"> {{ totalAddedQuantity }} </span>
+    <span style="color:aliceblue;margin-top: -10px;"> {{ totalAddedProduct }} </span>
     <ion-icon name="cart" (click)="onCart()">
     </ion-icon>
   </ion-fab-button>
 </ion-fab>
+<!-- cart icon and its work end -->
 <!-- cart icon and its work end -->

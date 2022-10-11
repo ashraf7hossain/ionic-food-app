@@ -17,9 +17,9 @@
         <ion-item *ngFor="let order of orders">
              <ion-card>
                 <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Order ID:</h6> {{ order._id }}</ion-item>
-                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Product Quantity:</h6> {{ order.totalAddedQuantity}}</ion-item>
-                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Total Payment: </h6>{{order.grandTotal  }}</ion-item>
-                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Order Status: </h6> <span style="color: red;">{{ order.status }}</span></ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Product Quantity:</h6> <span style="margin-top: 0.5rem;">{{ order.totalAddedQuantity}}</span></ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Total Payment: </h6> <span style="margin-top: 0.5rem;">{{order.grandTotal  }}</span></ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Order Status: </h6> <span style="margin-top: 0.5rem; color:red;">{{ order.status }}</span></ion-item>
              </ion-card>
         </ion-item>
     </ion-list>

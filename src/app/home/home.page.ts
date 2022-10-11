@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { AuthorizationService } from 'services/authorization.service';
 
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -17,28 +18,37 @@ export class HomePage implements OnInit{
   products:any[] = [];
  // trendingProdducts:any[] = [];
   sliders: any[] = [];
-  totalAddedQuantity: number = 0;
+  totalAddedProduct: number = 0;
   catagories: any[];
   name:string;
 
   constructor(private http: HttpClient, 
-    private cartService: CartService,
+    private cartApi: CartService,
     private router:Router,
     private auth: AuthorizationService) {}
 
   ngOnInit(){
+
+    this.cartApi.getCartProducts().subscribe( (response:any)=>{ 
+      let allCartProducts = response.data;
+      for(let cp of allCartProducts){
+         if( cp.userID == this.auth.getUserPayload().sub){
+             this.totalAddedProduct += +cp.quantity;
+         }
+      } 
+    });    
    this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
      this.products = res.data;
   });
 
  
 
-   this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
-    this.cartService.getCartProducts().subscribe(  (res)=>{
+   this.cartApi.getCartProducts().subscribe(  (cartProducts)=>{
+    this.cartApi.getCartProducts().subscribe(  (res)=>{
          let cartProducts = res.data;
          for( let cp of cartProducts){
              if( cp.userID == this.auth.getUserPayload().sub){
-                this. totalAddedQuantity += cp.quantity;
+                this. totalAddedProduct += cp.quantity;
              }
          }    
     })
@@ -70,8 +80,8 @@ export class HomePage implements OnInit{
 
   onAddToCart(product: any){
         
-    this.totalAddedQuantity++;
-    this.cartService.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
+    this.totalAddedProduct++;
+    this.cartApi.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
       let arr:any[] = res.data;
       for(let cp of arr){
               console.log("Enterred!!!!");
@@ -80,7 +90,7 @@ export class HomePage implements OnInit{
                   cp.quantity++;
                   cp.subtotal = +cp.unitPrice  + +cp.subtotal;  
                 
-                  this.cartService.editCartProduct(cp._id, cp).subscribe(); 
+                  this.cartApi.editCartProduct(cp._id, cp).subscribe(); 
                   return; 
               }
     } 
@@ -94,7 +104,7 @@ export class HomePage implements OnInit{
     newCartProduct.subtotal=product.unitPrice;
     newCartProduct.productID = product._id; //! means it not null for sure
 
-    this.cartService.addCartProduct( newCartProduct  ).subscribe();
+    this.cartApi.addCartProduct( newCartProduct  ).subscribe();
 
 })
 

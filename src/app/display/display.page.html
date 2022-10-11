@@ -4,7 +4,7 @@
       <ion-button class="menu-btn" slot="start">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-button>
-      <ion-item class="search-item">
+      <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
         <ion-input #search type="text" ></ion-input>
         <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
       </ion-item>
@@ -44,5 +44,13 @@
 </ion-content>
 <!-- all products list ends -->
 
+
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary">
+    <span style="color:aliceblue;margin-top: -10px;"> {{ totalAddedProduct }} </span>
+    <ion-icon name="cart">
+    </ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
 

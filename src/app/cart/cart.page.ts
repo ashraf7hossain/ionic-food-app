@@ -34,11 +34,10 @@ export class CartPage implements OnInit {
   }
 
   onCart(){
-    console.log("Asce ekhane!!");
+
   }
 
   onSearch(value:any){
-    console.log(value);
     this.router.navigate(['/display', value]);
   }
 

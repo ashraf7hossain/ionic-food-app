@@ -15,7 +15,7 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
-  trendingProdducts:any[] = [];
+ // trendingProdducts:any[] = [];
   sliders: any[] = [];
   totalAddedQuantity: number = 0;
   catagories: any[];
@@ -29,19 +29,9 @@ export class HomePage implements OnInit{
   ngOnInit(){
    this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
      this.products = res.data;
-     for(let pr of this.products){
-        if( pr.isTrending )
-            this.trendingProdducts.push( pr );
-     }
   });
 
-   this.http.get<any[]>(`http://localhost:3030/sliders`).subscribe( (res:any) =>{
-     this.sliders = res.data;
-   });
-
-   this.http.get<any[]>(`http://localhost:3030/catagories`).subscribe( (res:any) =>{
-     this.catagories = res.data;
-   });
+ 
 
    this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
     this.cartService.getCartProducts().subscribe(  (res)=>{

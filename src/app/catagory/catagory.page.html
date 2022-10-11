@@ -1,0 +1,49 @@
+<ion-header>
+  <div class="header-section">
+    <ion-toolbar>
+      <ion-button class="menu-btn" slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-button>
+      <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
+        <ion-input #search type="text" ></ion-input>
+        <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
+       
+      </ion-item>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+
+      <ion-card *ngFor="let cat of catagories">
+        <ion-grid >
+          <ion-row>
+            <ion-col size="6">
+              <ion-card-header>
+                <ion-card-title>
+                    <h4 style="font-weight:bold;">{{ cat.name }}</h4>
+                </ion-card-title>
+              
+              </ion-card-header>
+            </ion-col>
+            <ion-col size="6">
+              <img src={{cat.imageURL}} alt="">
+        
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+</ion-content>
+
+
+
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary">
+    <span style="color:aliceblue;margin-top: -10px;"> {{ totalAddedProduct }} </span>
+    <ion-icon name="cart" (click)="onCart()">
+    </ion-icon>
+  </ion-fab-button>
+</ion-fab>

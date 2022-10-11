@@ -16,4 +16,9 @@ export class AppComponent {
       this.router.navigate(['/login']);
 
   }
+
+
+  goToCatagory(){
+    this.router.navigate(['/catagory']);
+  }
 }

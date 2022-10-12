@@ -1,10 +1,9 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 import { IonModal } from '@ionic/angular';
-import { CartService } from 'src/app/services/cart.service';
-import { Router } from '@angular/router';
-import { AuthorizationService } from 'services/authorization.service';
-
+import { OverlayEventDetail } from '@ionic/core/components';
+// import { Observable, map, BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -16,87 +15,50 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
+  trendingProdducts:any[] = [];
   sliders: any[] = [];
-  totalAddedProduct: number = 0;
-  cartProducts: any[] = [];
+  cart:any[] = [];
   catagories: any[];
   name:string;
 
-  constructor(private http: HttpClient, 
-    private cartService: CartService,
-    private router:Router,
-    private auth: AuthorizationService) {}
+  constructor(private http: HttpClient) {}
 
-    slideOptions = {
-      slidesPerView: 1.5,
-      loop: true,
-      spaceBetween: 10,
-    }
+  ngOnInit(){
+   this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
+     this.products = res.data;
+     for(let pr of this.products){
+        if( pr.isTrending )
+            this.trendingProdducts.push( pr );
+     }
+  });
 
-    ngOnInit(){
-            
-            this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
-              this.products = res.data;
-             
-            });
+   this.http.get<any[]>(`http://localhost:3030/sliders`).subscribe( (res:any) =>{
+     this.sliders = res.data;
+   });
 
-            this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
-              this.cartService.getCartProducts().subscribe(  (res)=>{
-                   this.cartProducts = res.data;
-                   for( let cp of this.cartProducts){
-                       if( cp.userID == this.auth.getUserPayload().sub){
-                          this. totalAddedProduct += cp.quantity;
-                       }
-                   }    
-              })
-            })
-    }
+   this.http.get<any[]>(`http://localhost:3030/catagories`).subscribe( (res:any) =>{
+     this.catagories = res.data;
+   });
 
-
- 
-
-  onCart(){
-    console.log("Asce");
-    this.router.navigate(['/cart']);
+  }
+  addToCart(item:any){
+    this.cart.push(item);
+  }
+  cancel() {
+    this.modal.dismiss(null, 'cancel');
+  }
+  slideOptions = {
+    slidesPerView: 1.5,
+    // centeredSlides: true,
+    loop: true,
+    spaceBetween: 10,
+  }
+  confirm() {
+    this.modal.dismiss(this.name, 'confirm');
   }
 
-
-
-
-  onSearch(value:any){
-    this.router.navigate(['/display', value]);
-  }
-
-
-onAddToCart(product: any){
-        
-    this.totalAddedProduct++;
-    this.cartService.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
-      let arr:any[] = res.data;
-      for(let cp of arr){
-              if(cp.productID == product._id   && cp.userID == this.auth.getUserPayload().sub){ //already exist,
-                  cp.quantity++;
-                  cp.subtotal = +cp.unitPrice  + +cp.subtotal;  
-                
-                  this.cartService.editCartProduct(cp._id, cp).subscribe(); 
-                  return; 
-              }
-      } 
-
+  onWillDismiss(event: Event) {
     
-    let newCartProduct = {} as any;
-   
-    newCartProduct.userID = this.auth.getUserPayload().sub; newCartProduct.brand=product.brand;
-    newCartProduct.name=product.name;  newCartProduct.imageURL=product.imageURL;
-    newCartProduct.unitPrice=product.unitPrice; newCartProduct.quantity=1;
-    newCartProduct.subtotal=product.unitPrice;
-    newCartProduct.productID = product._id; //! means it not null for sure
-
-    this.cartService.addCartProduct( newCartProduct  ).subscribe();
-
-})
-
-
-}
+  }
 
 }

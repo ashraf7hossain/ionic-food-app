@@ -1,61 +1,45 @@
 <ion-header>
-  <div class="header-section">
     <ion-toolbar>
       <ion-button class="menu-btn" slot="start">
         <ion-menu-button menu="main-menu"></ion-menu-button>
       </ion-button>
       <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
         <ion-input #search type="text" ></ion-input>
-        <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
+        <ion-icon slot="end" name="search"></ion-icon>
        
       </ion-item>
     </ion-toolbar>
-  </div>
+
 </ion-header>
 
 <ion-content>
-  <ion-list>
-     <ion-item>
-          <img src="https://image.shutterstock.com/shutterstock/photos/1934081501/display_1500/stock-photo-weekend-super-sale-shopping-template-1934081501.jpg">
-     </ion-item>
-    <ion-card *ngFor="let product of products">
-      <ion-grid >
-        <ion-row>
-          <ion-col size="6">
-            <ion-card-header>
-              <ion-card-title>
-                {{ product.name }}
-              </ion-card-title>
-              <ion-card-subtitle>
-                Available Units: {{ product.stockAvailable }}
-              </ion-card-subtitle>
-              <ion-card-subtitle>
-                ${{ product.unitPrice }}
-              </ion-card-subtitle>
-            </ion-card-header>
-          </ion-col>
-          <ion-col size="6">
-            <img src={{product.imageURL}} alt="">
-            <ion-fab-button color="primary">
-              <ion-icon name="add" (click)="onAddToCart(product)"></ion-icon>
-            </ion-fab-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-  </ion-list>
+      <ion-item >
+          <img   src="https://image.shutterstock.com/shutterstock/photos/1934081501/display_1500/stock-photo-weekend-super-sale-shopping-template-1934081501.jpg">
+      </ion-item>
 </ion-content>
-<!-- all products list ends -->
+
+<ion-content>
+      
+        <ion-card *ngFor="let product of products; let i = index">
+          <h3 *ngIf="i==0" style="margin-left: 8rem; font-weight: bolder;">Cloth</h3>
+          <h3 *ngIf="i==3" style="margin-left: 8rem; font-weight: bolder;">Smartphone</h3>
+          <h3 *ngIf="i==6" style="margin-left: 8rem; font-weight: bolder;">Watch</h3>
+          <h3 *ngIf="i==9" style="margin-left: 8rem; font-weight: bolder;">Perfume</h3>
+          <ion-grid >
+            <ion-row >
+              <ion-col >
+                <img [src]="product.imageURL">
+                
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+  
+
+</ion-content>
 
 
-<!-- cart icon and its work -->
-<ion-fab vertical="top" horizontal="end" slot="fixed">
-  <ion-fab-button color="primary">
-    <span style="color:aliceblue;margin-top: -10px;">  </span>
-    <span  style="color:aliceblue;margin-top: -10px">  </span>
-    <ion-icon name="cart" (click)="onCart()">
-    </ion-icon>
-  </ion-fab-button>
-</ion-fab>
-<!-- cart icon and its work end -->
-<!-- cart icon and its work end -->
+
+
+
+

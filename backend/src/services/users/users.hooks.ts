@@ -8,7 +8,7 @@ const { hashPassword, protect } = local.hooks;
 export default {
   before: {
     all: [],
-    find: [  authenticate('jwt') ],
+    find: [  ],
     get: [   ],
     create: [ hashPassword('password') ],
     update: [ hashPassword('password'),  authenticate('jwt') ],

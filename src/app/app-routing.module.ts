@@ -42,6 +42,14 @@ const routes: Routes = [
     path: 'admin-products',
     loadChildren: () => import('./admin-products/admin-products.module').then( m => m.AdminProductsPageModule)
   },
+  {
+    path: 'admin-orders',
+    loadChildren: () => import('./admin-orders/admin-orders.module').then( m => m.AdminOrdersPageModule)
+  },
+  {
+    path: 'admin-users',
+    loadChildren: () => import('./admin-users/admin-users.module').then( m => m.AdminUsersPageModule)
+  },
 
 
 

@@ -1,0 +1,65 @@
+<ion-header>
+  <div class="header-section">
+    <ion-toolbar>
+      <ion-button class="menu-btn" slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-button>
+      <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
+        <ion-input #search type="text" ></ion-input>
+        <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
+      </ion-item>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content *ngIf=" totalAddedProduct">
+  
+  <ion-list>
+  
+
+    <ion-item *ngFor="let cp of cartProducts">
+        <ion-avatar>
+        <img  [src]="cp.imageURL" />
+        </ion-avatar>
+
+        {{ cp.name.substring(0,5) }}
+     
+
+      <div style="margin-left: 4rem; ">
+          <ion-icon name="remove-outline" style="margin-right: 0.5rem; font-weight: bold;"  (click)="minusQuantity(cp)"></ion-icon>
+        {{cp.quantity}}
+          <ion-icon name="add-outline"   style="margin-left: 0.5rem; font-weight: bold;"  (click)="addQuantity(cp)"></ion-icon>
+      </div>
+
+      <ion-icon name='trash' slot="end"  (click)="deleteCartProduct(cp)"></ion-icon>
+     
+    </ion-item>
+
+  
+  </ion-list>
+
+  <div style="margin-left:5rem;">
+      <h5 style="font-weight: bold;">Total:  <span style="color: rgb(234, 11, 234);">{{ total }}</span></h5> 
+      <h5 style="font-weight: bold;">Tax:  <span  style="color: rgb(234, 11, 234);">{{ tax }}</span></h5>   
+      <h5 style="font-weight: bold;">Grand Total:  <span  style="color: rgb(234, 11, 234);">{{ grandTotal }}</span></h5> 
+  </div>
+
+  <ion-button expand="block" style="margin-top: 2rem;" (click)="onConfirm()" >Confirm Order</ion-button>
+
+</ion-content>
+
+
+<ion-content  *ngIf="!totalAddedProduct">
+     <div style="text-align: center; color:red; margin-top:3rem;">
+           <h1>No Cart Products!!</h1>
+     </div>
+</ion-content>
+
+
+<ion-fab vertical="top" horizontal="end" slot="fixed">
+  <ion-fab-button color="primary">
+    <span  style="color:aliceblue;margin-top: -10px"> {{ totalAddedProduct }} </span>
+    <ion-icon name="cart" (click)="onCart()">
+    </ion-icon>
+  </ion-fab-button>
+</ion-fab>

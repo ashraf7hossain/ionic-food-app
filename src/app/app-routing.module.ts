@@ -11,6 +11,36 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'display/:search',
+    loadChildren: () => import('./display/display.module').then( m => m.DisplayPageModule)
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'cart',
+    loadChildren: () => import('./cart/cart.module').then( m => m.CartPageModule)
+  },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+  },  {
+    path: 'myorder',
+    loadChildren: () => import('./myorder/myorder.module').then( m => m.MyorderPageModule)
+  },
+  {
+    path: 'catagory',
+    loadChildren: () => import('./catagory/catagory.module').then( m => m.CatagoryPageModule)
+  },
+
+
+
 ];
 
 @NgModule({

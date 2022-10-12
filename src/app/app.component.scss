@@ -2,3 +2,10 @@ ion-toolbar{
     --background: rgba(253,242,247, 1);
     color: #e21b70;
 }
+ion-app{
+    overflow-y: auto;
+}
+img{
+    width: 50%;
+    height: 3rem;
+}

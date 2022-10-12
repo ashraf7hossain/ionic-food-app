@@ -1,0 +1,36 @@
+<ion-header>
+  <div class="header-section">
+    <ion-toolbar>
+      <ion-button class="menu-btn" slot="start">
+        <ion-menu-button menu="main-menu"></ion-menu-button>
+      </ion-button>
+      <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
+        <ion-input #search type="text" ></ion-input>
+        <ion-icon slot="end" name="search"></ion-icon>
+      </ion-item>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item *ngFor="let order of orders">
+             <ion-card>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Order ID:</h6> {{ order._id }}</ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Product Quantity:</h6> <span style="margin-top: 0.5rem;">{{ order.totalAddedQuantity}}</span></ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Total Payment: </h6> <span style="margin-top: 0.5rem;">{{order.grandTotal  }}</span></ion-item>
+                <ion-item><h6 style="font-weight: bold; margin-right: 0.2rem;">Order Status: </h6> <span style="margin-top: 0.5rem; color:red;">{{ order.status }}</span></ion-item>
+             </ion-card>
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>
+
+<ion-fab vertical="top" horizontal="end" slot="fixed" (click)="onCart()">
+  <ion-fab-button color="primary">
+    <span style="color:aliceblue;margin-top: -10px"> {{ totalAddedQuanty }} </span>
+    <ion-icon name="cart">
+    </ion-icon>
+  </ion-fab-button>
+</ion-fab>

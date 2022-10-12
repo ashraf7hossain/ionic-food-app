@@ -1,9 +1,10 @@
 import { Component,OnInit,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { IonModal } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core/components';
-// import { Observable, map, BehaviorSubject} from 'rxjs';
+import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
+import { AuthorizationService } from 'services/authorization.service';
+
 
 @Component({
   selector: 'app-home',
@@ -15,42 +16,87 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
-  cart:any[] = [];
-  message = "hello world";
+  sliders: any[] = [];
+  totalAddedProduct: number = 0;
+  cartProducts: any[] = [];
+  catagories: any[];
   name:string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, 
+    private cartService: CartService,
+    private router:Router,
+    private auth: AuthorizationService) {}
 
-  ngOnInit(){
-   this.http.get<any[]>(`${environment.baseURL}/products.json`).subscribe(res =>{
-     let arr = Object.entries(res);
-    for(let [x,y] of arr){
-      this.products.push(y);
+    slideOptions = {
+      slidesPerView: 1.5,
+      loop: true,
+      spaceBetween: 10,
     }
-    console.log(this.products);
-   });
-  }
-  addToCart(item:any){
-    this.cart.push(item);
-  }
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
-  }
-  slideOptions = {
-    // slidesPerView: 1.5,
-    // centeredSlides: true,
-    loop: true,
-    spaceBetween: 10,
-  }
-  confirm() {
-    this.modal.dismiss(this.name, 'confirm');
+
+    ngOnInit(){
+            
+            this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
+              this.products = res.data;
+             
+            });
+
+            this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
+              this.cartService.getCartProducts().subscribe(  (res)=>{
+                   this.cartProducts = res.data;
+                   for( let cp of this.cartProducts){
+                       if( cp.userID == this.auth.getUserPayload().sub){
+                          this. totalAddedProduct += cp.quantity;
+                       }
+                   }    
+              })
+            })
+    }
+
+
+ 
+
+  onCart(){
+    console.log("Asce");
+    this.router.navigate(['/cart']);
   }
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
+
+
+
+  onSearch(value:any){
+    this.router.navigate(['/display', value]);
   }
+
+
+onAddToCart(product: any){
+        
+    this.totalAddedProduct++;
+    this.cartService.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
+      let arr:any[] = res.data;
+      for(let cp of arr){
+              if(cp.productID == product._id   && cp.userID == this.auth.getUserPayload().sub){ //already exist,
+                  cp.quantity++;
+                  cp.subtotal = +cp.unitPrice  + +cp.subtotal;  
+                
+                  this.cartService.editCartProduct(cp._id, cp).subscribe(); 
+                  return; 
+              }
+      } 
+
+    
+    let newCartProduct = {} as any;
+   
+    newCartProduct.userID = this.auth.getUserPayload().sub; newCartProduct.brand=product.brand;
+    newCartProduct.name=product.name;  newCartProduct.imageURL=product.imageURL;
+    newCartProduct.unitPrice=product.unitPrice; newCartProduct.quantity=1;
+    newCartProduct.subtotal=product.unitPrice;
+    newCartProduct.productID = product._id; //! means it not null for sure
+
+    this.cartService.addCartProduct( newCartProduct  ).subscribe();
+
+})
+
+
+}
 
 }

@@ -38,6 +38,10 @@ const routes: Routes = [
     path: 'catagory',
     loadChildren: () => import('./catagory/catagory.module').then( m => m.CatagoryPageModule)
   },
+  {
+    path: 'admin-products',
+    loadChildren: () => import('./admin-products/admin-products.module').then( m => m.AdminProductsPageModule)
+  },
 
 
 

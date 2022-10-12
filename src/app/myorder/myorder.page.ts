@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from 'src/app/services/order.service';
 import { Router } from '@angular/router';
-import { OrderProduct } from 'src/app/models/orderProduct';
-import { Order } from 'src/app/models/order';
 import { OrderApiService } from 'src/app/services/order-api.service';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { CartService } from 'src/app/services/cart.service';
+
 
 @Component({
   selector: 'app-myorder',

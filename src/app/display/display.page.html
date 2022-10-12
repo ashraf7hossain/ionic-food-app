@@ -6,7 +6,7 @@
       </ion-button>
       <ion-item class="search-item" style="width: 65%; margin-left: 1rem;">
         <ion-input #search type="text" ></ion-input>
-        <ion-icon slot="end" name="search" (click)="onSearch(search.value)"></ion-icon>
+        <ion-icon slot="end" name="search" (click)="anotherSearch(search.value)"></ion-icon>
       </ion-item>
     </ion-toolbar>
   </div>
@@ -33,8 +33,8 @@
           </ion-col>
           <ion-col size="6">
             <img src={{product.imageURL}} alt="">
-            <ion-fab-button (click)="addToCart(product)" color="primary">
-              <ion-icon name="add"></ion-icon>
+            <ion-fab-button color="primary">
+              <ion-icon name="add" (click)="onAddToCart(product)"></ion-icon>
             </ion-fab-button>
           </ion-col>
         </ion-row>
@@ -45,7 +45,7 @@
 <!-- all products list ends -->
 
 
-<ion-fab vertical="top" horizontal="end" slot="fixed">
+<ion-fab vertical="top" horizontal="end" slot="fixed" (click)="onCart()">
   <ion-fab-button color="primary">
     <span style="color:aliceblue;margin-top: -10px;"> {{ totalAddedProduct }} </span>
     <ion-icon name="cart">

@@ -17,8 +17,21 @@ export class AppComponent {
 
   }
 
+  goToCart(){
+    this.router.navigate(['/cart']);
+  }
+
+
+  goToHome(){
+    this.router.navigate(['/home']);
+  }
 
   goToCatagory(){
     this.router.navigate(['/catagory']);
   }
+
+  goToOrder(){
+    this.router.navigate(['/myorder']);
+  }
+
 }

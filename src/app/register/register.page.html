@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <form (ngSubmit)="onSubmit()" #regForm = "ngForm">
+  <form (ngSubmit)="onSubmit()" #regForm = "ngForm" style="margin-bottom: 1rem;">
     <ion-item lines="full">
       <ion-label position="floating">First name</ion-label>
       <ion-input type="text"  [(ngModel)]="user.fullName" name="fullName"  #fullName="ngModel" required></ion-input>
@@ -111,4 +111,7 @@
       </ion-col>
     </ion-row>
   </form>
+  <span style="margin-left:30%; margin-top: 3rem; font-weight: bolder;">Already a user?</span>
+  <ion-button [routerLink]="['/login']" expand="block" color="danger" style="margin-top: 1rem;">Sign In</ion-button>
+
 </ion-content>

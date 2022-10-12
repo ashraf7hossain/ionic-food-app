@@ -21,25 +21,20 @@
         <ion-avatar>
         <img  [src]="cp.imageURL" />
         </ion-avatar>
-      {{cp.name}}
+
+        {{ cp.name.substring(0,5) }}
+     
 
       <div style="margin-left: 4rem; ">
-      
- 
           <ion-icon name="remove-outline" style="margin-right: 0.5rem; font-weight: bold;"  (click)="minusQuantity(cp)"></ion-icon>
-    
-        
         {{cp.quantity}}
-
-     
           <ion-icon name="add-outline"   style="margin-left: 0.5rem; font-weight: bold;"  (click)="addQuantity(cp)"></ion-icon>
-      
-       
       </div>
 
       <ion-icon name='trash' slot="end"  (click)="deleteCartProduct(cp)"></ion-icon>
      
     </ion-item>
+
   
   </ion-list>
 

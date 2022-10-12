@@ -31,25 +31,31 @@ export class MyorderPage implements OnInit {
              ) { }
 
              ngOnInit(): void {
-              this.orderApi.getOrders().subscribe( (res)=>{
-                   let arr:any = res.data;
+              this.orderApi.getOrders().subscribe( (res:any)=>{
+                   let arr:any[] = res.data;
+                   console.log(arr);
                    for(let order of arr){
                         if( order.userID == this.auth.getUserPayload().sub  ){
                            this.orders.push( order);
                         }
                    }
+                   this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
+                    this.cartService.getCartProducts().subscribe(  (res:any)=>{
+                         this.cartProducts = res.data;
+                         for( let cp of this.cartProducts){
+                             if( cp.userID == this.auth.getUserPayload().sub){
+                                this.totalAddedQuanty +=  +cp.quantity;
+                             }
+                         }    
+                    })
+                  })
               })
        
-              this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
-                 this.cartService.getCartProducts().subscribe(  (res)=>{
-                      this.cartProducts = res.data;
-                      for( let cp of this.cartProducts){
-                          if( cp.userID == this.auth.getUserPayload().sub){
-                             this.totalAddedQuanty += cp.quantity;
-                          }
-                      }    
-                 })
-               })
+          
          }
+
+         onCart(){
+          this.router.navigate(['/cart']);
+        }
 
 }

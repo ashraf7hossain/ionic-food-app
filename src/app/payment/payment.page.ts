@@ -3,12 +3,12 @@ import { ProductApiService } from 'src/app/services/product-api.service';
 import { OrderService } from 'src/app/services/order.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
-import { OrderProduct } from 'src/app/models/orderProduct';
 import { AuthorizationService } from 'src/app/services/authorization.service';
 import { OrderApiService } from 'src/app/services/order-api.service';
 import { Order } from 'src/app/models/order';
 import { User } from 'src/app/models/user';
 import { UserApiService } from 'src/app/services/user-api.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-payment',
@@ -24,13 +24,13 @@ export class PaymentPage implements OnInit {
   totalAddedQuantity: number = 0;
   user: User = {} as User;
 
-  constructor(private router:Router,
+  constructor(
+    private router:Router,
     private cartService: CartService,
-    private orderService: OrderService,
     private orderApi: OrderApiService,
     private auth:  AuthorizationService,
     private userApi: UserApiService,
-    private productApi: ProductApiService) { }
+    private alertController: AlertController){}
 
     ngOnInit(): void {
 
@@ -50,12 +50,23 @@ export class PaymentPage implements OnInit {
              this.cartProducts = res.data;
              for( let cp of this.cartProducts){
                  if( cp.userID == this.auth.getUserPayload().sub){
-                    this.totalAddedQuantity += cp.quantity;
+                    this.totalAddedQuantity += +cp.quantity;
                  }
              }    
         })
       })
     }
+
+   
+      async  confirmAlert(){
+        const alert = await this.alertController.create({
+          header: 'Order is Confirmed!',
+          buttons: ['OK']
+        });
+    
+        await alert.present();
+      }
+    
 
     onCheckout(){ 
       
@@ -84,6 +95,7 @@ export class PaymentPage implements OnInit {
             }
             this.totalAddedQuantity = 0;
         });    
+        this.router.navigate(['/home']);
       
     });
 

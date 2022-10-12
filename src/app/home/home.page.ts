@@ -16,56 +16,47 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
- // trendingProdducts:any[] = [];
   sliders: any[] = [];
   totalAddedProduct: number = 0;
+  cartProducts: any[] = [];
   catagories: any[];
   name:string;
 
   constructor(private http: HttpClient, 
-    private cartApi: CartService,
+    private cartService: CartService,
     private router:Router,
     private auth: AuthorizationService) {}
 
-  ngOnInit(){
+    slideOptions = {
+      slidesPerView: 1.5,
+      loop: true,
+      spaceBetween: 10,
+    }
 
-    this.cartApi.getCartProducts().subscribe( (response:any)=>{ 
-      let allCartProducts = response.data;
-      for(let cp of allCartProducts){
-         if( cp.userID == this.auth.getUserPayload().sub){
-             this.totalAddedProduct += +cp.quantity;
-         }
-      } 
-    });    
-   this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
-     this.products = res.data;
-  });
+    ngOnInit(){
+            
+            this.http.get<any[]>(`http://localhost:3030/products`).subscribe( (res:any) =>{
+              this.products = res.data;
+             
+            });
+
+            this.cartService.getCartProducts().subscribe(  (cartProducts)=>{
+              this.cartService.getCartProducts().subscribe(  (res)=>{
+                   this.cartProducts = res.data;
+                   for( let cp of this.cartProducts){
+                       if( cp.userID == this.auth.getUserPayload().sub){
+                          this. totalAddedProduct += cp.quantity;
+                       }
+                   }    
+              })
+            })
+    }
+
 
  
 
-   this.cartApi.getCartProducts().subscribe(  (cartProducts)=>{
-    this.cartApi.getCartProducts().subscribe(  (res)=>{
-         let cartProducts = res.data;
-         for( let cp of cartProducts){
-             if( cp.userID == this.auth.getUserPayload().sub){
-                this. totalAddedProduct += cp.quantity;
-             }
-         }    
-    })
-})
-
-  }
-
-
-  slideOptions = {
-    slidesPerView: 1.5,
-    // centeredSlides: true,
-    loop: true,
-    spaceBetween: 10,
-  }
-
   onCart(){
-    console.log("Asce ekhane!!");
+    console.log("Asce");
     this.router.navigate(['/cart']);
   }
 
@@ -73,27 +64,24 @@ export class HomePage implements OnInit{
 
 
   onSearch(value:any){
-    console.log(value);
     this.router.navigate(['/display', value]);
   }
 
 
-  onAddToCart(product: any){
+onAddToCart(product: any){
         
     this.totalAddedProduct++;
-    this.cartApi.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
+    this.cartService.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
       let arr:any[] = res.data;
       for(let cp of arr){
-              console.log("Enterred!!!!");
               if(cp.productID == product._id   && cp.userID == this.auth.getUserPayload().sub){ //already exist,
-                  console.log("Existed");
                   cp.quantity++;
                   cp.subtotal = +cp.unitPrice  + +cp.subtotal;  
                 
-                  this.cartApi.editCartProduct(cp._id, cp).subscribe(); 
+                  this.cartService.editCartProduct(cp._id, cp).subscribe(); 
                   return; 
               }
-    } 
+      } 
 
     
     let newCartProduct = {} as any;
@@ -104,10 +92,11 @@ export class HomePage implements OnInit{
     newCartProduct.subtotal=product.unitPrice;
     newCartProduct.productID = product._id; //! means it not null for sure
 
-    this.cartApi.addCartProduct( newCartProduct  ).subscribe();
+    this.cartService.addCartProduct( newCartProduct  ).subscribe();
 
 })
 
 
 }
+
 }

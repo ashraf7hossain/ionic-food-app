@@ -60,8 +60,44 @@ export class DisplayPage implements OnInit {
      this.searchAction();
   }
 
-  addToCart(item:any){
-   
+  anotherSearch(value:any){
+    this.router.navigate(['/display', value]);
   }
+  onCart(){
+   
+    this.router.navigate(['/cart']);
+  }
+ 
+
+  onAddToCart(product: any){
+        
+    this.totalAddedProduct++;
+    this.cartApi.getCartProducts().subscribe(  (res:any)=>{ //always subscriber er vitorei kaj korte hoy noile problem kore
+      let arr:any[] = res.data;
+      for(let cp of arr){
+              if(cp.productID == product._id   && cp.userID == this.auth.getUserPayload().sub){ //already exist,
+                  cp.quantity++;
+                  cp.subtotal = +cp.unitPrice  + +cp.subtotal;  
+                
+                  this.cartApi.editCartProduct(cp._id, cp).subscribe(); 
+                  return; 
+              }
+      } 
+
+    
+    let newCartProduct = {} as any;
+   
+    newCartProduct.userID = this.auth.getUserPayload().sub; newCartProduct.brand=product.brand;
+    newCartProduct.name=product.name;  newCartProduct.imageURL=product.imageURL;
+    newCartProduct.unitPrice=product.unitPrice; newCartProduct.quantity=1;
+    newCartProduct.subtotal=product.unitPrice;
+    newCartProduct.productID = product._id; //! means it not null for sure
+
+    this.cartApi.addCartProduct( newCartProduct  ).subscribe();
+
+})
+
+
+}
 
 }

@@ -9,3 +9,10 @@
     padding: 5px 20px;
     height: 50px;
 }
+
+.total {
+    display: flex;
+    h5:nth-child(2){
+        margin-left: 100px;
+    }
+}

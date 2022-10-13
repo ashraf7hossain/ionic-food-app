@@ -15,10 +15,16 @@ export class HomePage implements OnInit{
   @ViewChild(IonModal) modal: IonModal;
 
   products:any[] = [];
+  tempProducts:any[] = [];
   cart:any[] = [];
   message = "hello world";
   name:string;
   cartCount: number = 0;
+  cls:any = {
+    'all' : true,
+    'food' : false,
+    'drink' : false
+  }
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +42,7 @@ export class HomePage implements OnInit{
     for(let [x,y] of arr){
       this.products.push(y);
     }
+    this.tempProducts = this.products;
     console.log(this.products);
    });
   }
@@ -62,6 +69,22 @@ export class HomePage implements OnInit{
       return;
     }
   }
+  filter(category:string){
+    let clsArr = Object.keys(this.cls);
+
+    for(let x of clsArr){
+      this.cls[x] = false;
+    }
+    
+    this.cls[category] = true;
+    this.products = this.tempProducts;
+    if(category === 'all'){
+      this.products = this.tempProducts;
+      return;
+    }
+    this.products = this.products.filter(prod => prod.category === category);
+  }
+
 
   onWillDismiss(event: Event) {
     const ev = event as CustomEvent<OverlayEventDetail<string>>;

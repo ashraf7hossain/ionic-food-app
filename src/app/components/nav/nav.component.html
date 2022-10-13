@@ -1,6 +1,13 @@
 <ion-menu menuId="main-menu" content-id="main">
   <ion-content>
     <div class="menu-header-bg">
+
+      <div class="custom-shape-divider-bottom-1665635609">
+        <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+            <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="shape-fill"></path>
+        </svg>
+    </div>
+      
       <div>
         <ion-icon name="person-circle-outline"></ion-icon>
       <ion-title *ngIf="currentUser.hasOwnProperty('email')">
@@ -8,53 +15,26 @@
       </ion-title>
       </div>
     </div>
+    
     <ion-list>
       <ion-item>
         <ion-icon name="home-outline" slot="start"></ion-icon>
-        <ion-label [routerLink]="['/home']">Home</ion-label>
+        <ion-label [routerLink]="['/home']" (click) = "close()">Home</ion-label>
       </ion-item>
+
       <ion-item>
         <ion-icon name="paper-plane" slot="start"></ion-icon>
         <ion-label>Outbox</ion-label>
       </ion-item>
       <ion-item *ngIf="!currentUser.hasOwnProperty('email')">
         <ion-icon name="log-in-outline" slot="start"></ion-icon>
-        <ion-label [routerLink]="['/login']">Login</ion-label>
+        <ion-label [routerLink]="['/login']" (click) = "close()">Login</ion-label>
       </ion-item>
       <ion-item *ngIf="currentUser.hasOwnProperty('email')">
         <ion-icon name="log-out-outline" slot="start"></ion-icon>
         <ion-label (click)="logout()">Log Out</ion-label>
       </ion-item>
     </ion-list>
+    
   </ion-content>
 </ion-menu>
-
-<!-- <ion-menu menuId="main-menu" content-id="main">
-  <ion-header>
-    <ion-toolbar>
-      <ion-title>
-        Menu
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-content>
-    <ion-list>
-      <ion-item>
-        <ion-icon name="home-outline" slot="start"></ion-icon>
-        <ion-label [routerLink] = "['/home']">Home</ion-label>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="paper-plane" slot="start"></ion-icon>
-        <ion-label>Outbox</ion-label>
-      </ion-item>
-      <ion-item *ngIf = "!currentUser.hasOwnProperty('email')">
-        <ion-icon name="log-in-outline" slot="start"></ion-icon>
-        <ion-label [routerLink] = "['/login']">Login</ion-label>
-      </ion-item>
-      <ion-item *ngIf = "currentUser.hasOwnProperty('email')">
-        <ion-icon name="log-out-outline" slot="start"></ion-icon>
-        <ion-label (click) = "logout()">Log Out</ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-content>
-</ion-menu> -->

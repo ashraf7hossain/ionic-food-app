@@ -1,45 +1,43 @@
 <app-header></app-header>
 
 <ion-content>
-  <ion-slides [options]="slideOptions" pager="true">
-    <ion-slide *ngFor="let product of products">
-      <img [src]="product.img" />
-      <div class="product-info">
-        <h3> {{product.name}} </h3>
-        <h5> ${{product.price}} </h5>
+  <ion-item>
+    <div class="top-section">
+      <div class="search-group">
+        <input type="text" name="" id="" placeholder="searh all products...">
+        <ion-icon name="search"></ion-icon>
       </div>
-    </ion-slide>
-  </ion-slides>
-<!-- category -->
- <ion-item>
-  <ion-title>Categories</ion-title>
- </ion-item>
-  <ion-grid>
+      <ion-icon class="notify" name="notifications-outline"></ion-icon>
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <div class="banner">
+      <img src="https://st10.cannypic.com/thumbs/35/353669_632_canny_pic.jpg" alt="">
+    </div>
+  </ion-item>
+
+  <ion-item>
+    <ion-title>Categories</ion-title>
+  </ion-item>
+
+  <div class="category">
+    <button class="btn" [ngClass] = "{active: cls['all'] === true}" (click) = "filter('all')">All</button>
+    <button class="btn" [ngClass] = "{active: cls['food']}" (click) = "filter('food')">Food</button>
+    <button class="btn" [ngClass] = "{active: cls['drink']}" (click) = "filter('drink')">Drink</button>
+  </div>
+
+  <!-- products section -->
+   <ion-grid>
     <ion-row>
-      <ion-col size=6>
-        <div class="img-content">
-          <img class="left-img" src="https://cdn.pixabay.com/photo/2015/07/09/20/18/ham-838500_1280.jpg" alt="" srcset="">
-          <ion-button [routerLink]="['/allfoods']">
-            All Foods
-          </ion-button>
-        </div>
-      </ion-col>
-      <ion-col size=6>
-        <div class="imgs">
-          <div class="img-content">
-            <img src="https://cdn.pixabay.com/photo/2016/08/26/21/16/carrot-juice-1623157_1280.jpg" alt="" srcset="">
-            <ion-button [routerLink] = "['/allfoods']" [queryParams] = "{cat:'drink'}">
-              Drinks
-            </ion-button>
-          </div>
-          <div class="img-content">
-            <img src="https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg" alt="" srcset="">
-            <ion-button [routerLink] = "['/allfoods']" [queryParams] = "{cat:'food'}">
-              Food
-            </ion-button>
-          </div>
-        </div>
-      </ion-col>
+      <ng-container *ngFor = "let product of products">
+        <ion-col size = "6" [routerLink] = "['/details']" [queryParams] = "{'id' : product.id}">
+          <img class="card-img" [src] = "product.img">
+          <h5> {{ product.name }} </h5>
+          <h4 style="color: crimson;"> ${{ product.price }}</h4>
+        </ion-col>
+      </ng-container>
     </ion-row>
-  </ion-grid>
-<!-- category ends -->
+   </ion-grid>
+  <!-- products section ends -->
+  </ion-content>

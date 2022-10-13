@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-nav',
@@ -10,7 +11,7 @@ export class NavComponent implements OnInit {
 
   currentUser:any = {};
 
-  constructor(private _auth: AuthService) { }
+  constructor(private _auth: AuthService , private menu: MenuController) { }
 
   ngOnInit() {
     this._auth.currentUser.subscribe(res => {
@@ -20,6 +21,9 @@ export class NavComponent implements OnInit {
   }
   logout(){
     this._auth.logout();
+  }
+  close(){
+    this.menu.close();
   }
 
 }

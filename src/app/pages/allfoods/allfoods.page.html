@@ -30,7 +30,7 @@
              <ion-col size="6">
                <img src={{product.img}} alt="">
                <ion-fab-button (click)="addToCart(product)" color="primary">
-                 <ion-icon name="add"></ion-icon>
+                 <ion-icon name="cart"></ion-icon>
                </ion-fab-button>
              </ion-col>
            </ion-row>
@@ -46,7 +46,7 @@
 <ion-fab vertical="bottom" horizontal="end" slot="fixed">
   <ion-fab-button id="open-modal" color="primary">
     <span *ngIf="cartCount > 0" style="color:aliceblue;margin-top: -10px"> {{ cartCount}} </span>
-    <ion-icon name="cart">
+    <ion-icon name="basket-outline">
     </ion-icon>
   </ion-fab-button>
 </ion-fab>

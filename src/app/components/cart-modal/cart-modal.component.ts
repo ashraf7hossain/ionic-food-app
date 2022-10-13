@@ -19,16 +19,19 @@ export class CartModalComponent implements OnInit {
 
 
   constructor(private prd: ProductService) { }
+  total:number = 0;
   cart:any[] = [];
 
   ngOnInit() {
     this.prd.currentCart.subscribe(res => {
       this.cart = res;
-    })
+      this.total = this.cart.reduce((a, b) => (a + b.quantity * b.price),0);
+    });
   }
 
   changeQuantity(item:any, value:number){
     this.prd.changeQuantity(item,value);
+    this.total = this.cart.reduce((a, b) => (a + b.quantity * b.price),0);
   }
 
   cancel() {

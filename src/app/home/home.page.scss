@@ -1,104 +1,175 @@
-#container {
-  text-align: center;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+// #container {
+//   text-align: center;
+//   position: absolute;
+//   left: 0;
+//   right: 0;
+//   top: 50%;
+//   transform: translateY(-50%);
 
+// }
+
+// #container strong {
+//   font-size: 20px;
+//   line-height: 26px;
+// }
+
+// #container p {
+//   font-size: 16px;
+//   line-height: 22px;
+
+//   color: #8c8c8c;
+
+//   margin: 0;
+// }
+
+// #container a {
+//   text-decoration: none;
+// }
+
+
+// .search-item{
+//   width: 250px;
+//   margin: 20px auto;
+// }
+
+// ion-slide{
+//   position: relative;
+//   height: 300px;
+//   img{
+//     height: 300px;
+//     width: 100%;
+//     border-radius: 20px;
+//   }
+//   .product-info{
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     // transform: translate(-50%,-50%);
+//     color: #e21b70;
+//     background-color: #fff;
+//     padding: 10px 20px;
+//     font-weight: bold;
+//     border-radius: 5px;
+//     h3,h5{
+//       font-weight: bold;
+//     }
+//   }
+// }
+// .change-btn{
+//   margin-left: 20px;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+// }
+
+// .confirm-cart{
+//   padding: 5px 20px;
+//   height: 50px;
+// }
+// .category{
+//   height: 300px;
+//   margin: 15px 0px;
+// }
+// ion-col{
+//   overflow: hidden;
+//   img{
+//     border-radius: 10px;
+//     &:first-child{
+//       margin: 10px 0px;
+//     }
+//   }
+// }
+
+// .left-img{
+//   display: block;
+//   height: 100%;
+//   width: 100%;
+//   // transform: scale(2);
+// }
+// .img-content{
+//   position: relative;
+//   img{
+//     height: 100%;
+//   }
+//   ion-button{
+//     position: absolute;
+//     left: 50%;
+//     top: 50%;
+//     transform: translate(-50%);
+
+//   }
+// }
+// .first-content{
+//   height: 10vh;
+// }
+.top-section {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px 0px;
+  align-items: center;
+
+  .search-group {
+    position: relative;
+    ion-icon {
+      position: absolute;
+      font-size: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 0;
+    }
+  }
+
+  .notify {
+    font-size: 2rem;
+    color: darkgrey;
+    margin-left: 20px;
+    background-color: #f7f8f7;
+    border-radius: 10px;
+    padding: 10px 10px;
+  }
+
+  input {
+    width: 260px;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    background-color: #f7f8fb;
+
+    &:focus {
+      outline: 2px orange;
+    }
+  }
 }
+.banner {
+  padding: 20px;
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
-}
-
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
-}
-
-#container a {
-  text-decoration: none;
-}
-
-
-.search-item{
-  width: 250px;
-  margin: 20px auto;
-}
-
-ion-slide{
-  position: relative;
-  height: 300px;
-  img{
-    height: 300px;
-    width: 100%;
+  img {
     border-radius: 20px;
   }
-  .product-info{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    // transform: translate(-50%,-50%);
-    color: #e21b70;
-    background-color: #fff;
-    padding: 10px 20px;
-    font-weight: bold;
-    border-radius: 5px;
-    h3,h5{
-      font-weight: bold;
-    }
-  }
-}
-.change-btn{
-  margin-left: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
-.confirm-cart{
-  padding: 5px 20px;
-  height: 50px;
-}
-.category{
-  height: 300px;
-  margin: 15px 0px;
-}
-ion-col{
-  overflow: hidden;
-  img{
-    border-radius: 10px;
-    &:first-child{
-      margin: 10px 0px;
-    }
+.category {
+  position: sticky;
+  top:10px;
+  z-index: 10;;
+  overflow-x: auto;
+  white-space: nowrap;
+  &::-webkit-scrollbar{
+    width: 0px;
   }
-}
+  .btn{
+    width: 110px;
+    height: 60px;
+    margin: 5px 10px;
+    font-size: 1.25rem;
+    border-radius: 20px;
+  }
+  .btn.active{
+    background-color: #e21b7063;
+  }
 
-.left-img{
-  display: block;
-  height: 100%;
-  width: 100%;
-  // transform: scale(2);
 }
-.img-content{
-  position: relative;
-  img{
-    height: 100%;
-  }
-  ion-button{
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%);
-
-  }
-}
-.first-content{
-  height: 10vh;
+.card-img{
+  border-radius: 10px;
 }

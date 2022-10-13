@@ -18,9 +18,18 @@ export class HomePage implements OnInit{
   cart:any[] = [];
   message = "hello world";
   name:string;
+  cartCount: number = 0;
 
   constructor(private http: HttpClient) {}
 
+  slideOptions = {
+    freeMode: true,
+    centeredSlides: true,
+    loop: true,
+    slidesOffsetBefore: 11,
+    spaceBetween: 10,
+    pager: true
+  }
   ngOnInit(){
    this.http.get<any[]>(`${environment.baseURL}/products.json`).subscribe(res =>{
      let arr = Object.entries(res);
@@ -31,19 +40,27 @@ export class HomePage implements OnInit{
    });
   }
   addToCart(item:any){
+    if(this.cart.includes(item)){
+      return;
+    }
+    this.cartCount += 1;
     this.cart.push(item);
   }
   cancel() {
     this.modal.dismiss(null, 'cancel');
   }
-  slideOptions = {
-    // slidesPerView: 1.5,
-    // centeredSlides: true,
-    loop: true,
-    spaceBetween: 10,
-  }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
+  }
+
+  changeQuantity(product:any,value:number){
+    product.quantity += value;
+    this.cartCount += value;
+    if(product.quantity === 0){
+      this.cart = this.cart.filter(c => c.id !== product.id);
+      console.log(this.cart);
+      return;
+    }
   }
 
   onWillDismiss(event: Event) {

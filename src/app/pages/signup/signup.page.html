@@ -1,0 +1,54 @@
+<app-header></app-header>
+<app-back-button></app-back-button>
+
+<ion-content>
+
+    <div class="login-section ion-padding">
+        <div class="heading ion-padding">
+            <h1>Welcome To F For Food</h1>
+        <p>Sign in to Continue</p>
+        </div>
+
+        <form [formGroup] = "signForm" class="login-form" (ngSubmit) = "signUp()">
+            <div class="form-input">
+                <ion-item>
+                    <ion-label position="floating">
+                        Name
+                    </ion-label>
+                    <ion-input formControlName = "sname" type="email"></ion-input>
+                </ion-item>
+            </div>
+            <div class="form-input">
+                <ion-item>
+                    <ion-label position="floating">
+                        Email
+                    </ion-label>
+                    <ion-input formControlName = "semail" type="email"></ion-input>
+                </ion-item>
+            </div>
+            <div class="form-input">
+                <ion-item>
+                    <ion-label position="floating">
+                        Password
+                    </ion-label>
+                    <ion-input formControlName = "spassword" type="password"></ion-input>
+                </ion-item>
+            </div>
+            <div class="form-input">
+                <ion-item>
+                    <ion-label position="floating">
+                        Verify Password
+                    </ion-label>
+                    <ion-input formControlName = "svpassword" type="password"></ion-input>
+                </ion-item>
+            </div>
+            <ion-input type = "file" (change) = "getSelected($event)">Choose profile picture</ion-input>
+            <div class="action-button ion-padding">
+                <ion-button type = "submit" size="large" class="login-button">Sign Up</ion-button>
+                <p>Forgot Password</p>
+                <ion-button class="signup-button" size="large" fill="outline" routerLink="/login">Login</ion-button>
+            </div>
+        </form>
+    </div>
+     <img [src] = "downloadURL | async" alt="">
+</ion-content>

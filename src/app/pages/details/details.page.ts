@@ -11,6 +11,8 @@ export class DetailsPage implements OnInit {
 
   params: string = "";
   currentProduct: any = {};
+  toggle:boolean = false;
+  buynow:boolean = false;
 
   constructor(private acr: ActivatedRoute,
     private prd: ProductService) { }
@@ -27,7 +29,14 @@ export class DetailsPage implements OnInit {
       }
       this.currentProduct = temp.find(p => p.id === this.params);
       
-    })
+    });
+  }
+  addToCart(){
+    this.toggle = !this.toggle;
+    this.prd.addToCart(this.currentProduct);
+  }
+  buyNow(){
+    this.buynow = !this.buynow;
   }
 
 }

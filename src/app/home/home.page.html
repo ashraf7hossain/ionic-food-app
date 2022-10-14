@@ -34,7 +34,7 @@
         <ion-col size = "6" [routerLink] = "['/details']" [queryParams] = "{'id' : product.id}">
           <img class="card-img" [src] = "product.img">
           <h5> {{ product.name }} </h5>
-          <h4 style="color: crimson;"> ${{ product.price }}</h4>
+          <h4 style="color: #ff7465; font-weight: bold;"> ${{ product.price }}</h4>
         </ion-col>
       </ng-container>
     </ion-row>

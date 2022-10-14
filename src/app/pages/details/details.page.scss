@@ -1,0 +1,77 @@
+ion-content{
+    .details{
+        img{
+            border-radius: 20px;
+            padding: 5px 0px;
+        }
+        .details-top{
+            padding: 5px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            h1{
+                font-size: 2.35rem;
+                font-weight: bold;
+            }
+            h3{
+                font-size: 2rem;
+                color: #ff7465;
+                font-weight: bold;
+            }
+        }
+        p{
+            padding: 5px 15px;
+            font-size: 1.23rem;
+            color: grey;
+        }
+        .shopping{
+            padding: 5px 15px;
+            button{
+                padding: 20px;
+                &:nth-child(1){
+                    font-size: 2rem;
+                    color: #ff7465;
+                    border-radius: 50%;
+                    margin-right: 20px;
+                }
+                &:nth-child(1).active{
+                    color: white;
+                    background-color: #ff7465;
+                }
+                &:nth-child(2){
+                    padding: 30px 80px;
+                    font-size: 20px;
+                    border-radius: 50px;
+                    color: white;
+                    background-color: #ff7465;
+                }
+            }
+        }
+    }
+}
+.buynow-modal{
+    height: 50vh;
+    width: 100%;
+    background-color: orange;
+    padding: 5px 15px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: none;
+    transition: all ease-in-out 1s;
+}
+.buynow-modal.active{
+    display: block;
+    animation: bottom-top 1s;
+}
+@keyframes bottom-top {
+    from{
+        transform: translateY(100%);
+    }    
+    to{
+        transform: translate(0%);
+    }
+}

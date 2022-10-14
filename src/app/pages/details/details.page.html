@@ -1,3 +1,33 @@
-<h1>
-  {{ currentProduct | json }}
-</h1>
+<app-back-button></app-back-button>
+<ion-content>
+  <div class="details">
+    <img [src]="currentProduct.img" alt="" />
+    <div class="details-top">
+      <h1>{{ currentProduct.name }} </h1>
+      <h3>${{ currentProduct.price }}</h3>
+    </div>
+    <p>
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia reiciendis repudiandae possimus accusantium
+      illo? Odit in esse nulla aut reiciendis et, nostrum ab, quam porro vel maiores at cupiditate suscipit impedit enim
+      labore. Laudantium deserunt maxime perspiciatis enim nemo omnis veniam suscipit impedit, cum recusandae harum in
+      unde eligendi culpa?
+    </p>
+    <div class="shopping">
+      <button [ngClass] = "{active: toggle}" (click) = "addToCart()">
+        <ion-icon name = "cart"></ion-icon>
+      </button>
+      <button (click) = "buyNow()">
+        Buy Now
+      </button>
+    </div>
+  </div>
+</ion-content>
+<div class="buynow-modal" [ngClass] = "{active: buynow}">
+  <ion-icon name = "close-outline" (click) = "buyNow()"></ion-icon>
+  <div class="buynow-details">
+
+  </div>
+  <button class="confirm">
+    Confirm Purchase
+  </button>
+</div>

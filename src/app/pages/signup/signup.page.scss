@@ -30,9 +30,9 @@ ion-content{
         .form-input{
             position: relative;
             margin-bottom: 10px;
-            ion-item:part(native){
-                padding-left: 0;
-            }
+            // ion-item:part(native){
+            //     padding-left: 0;
+            // }
             ion-icon{
                 position: absolute;
                 top: 37px;
@@ -42,14 +42,14 @@ ion-content{
             }
             ion-label{
                 position: absolute;
-                margin-left: 35px;
+                // margin-left: 35px;
                 font-weight: bold;
-                font-size: 0.8rem;
+                font-size: 1rem;
                 top: 3px;
             }
             ion-input{
-                font-size: 0.8rem;
-                --padding-start: 36px;
+                font-size: 1rem;
+                // --padding-start: 5px;
                 --padding-top: 36px;
                 color: #7b7b7b;
 
@@ -70,6 +70,9 @@ ion-content{
         }
     }
 
+}
+.warning{
+    color: red;
 }
 @keyframes bottom-to-top {
     from{

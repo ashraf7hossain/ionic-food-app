@@ -19,14 +19,16 @@ export class SignupPage implements OnInit {
   signForm : FormGroup = new FormGroup({});
   selected: File ;
   downloadURL: any;
+  mail: string = "";
+  validMail:any;
   constructor(private storage: AngularFireStorage,
               private http: HttpClient) { }
 
   ngOnInit() {
     this.signForm = new FormGroup({
       sname : new FormControl('',[Validators.required]),
-      semail : new FormControl('',[Validators.required]),
-      spassword : new FormControl('',[Validators.required]),
+      semail : new FormControl('',[Validators.required,Validators.email]),
+      spassword : new FormControl('',[Validators.required ]),
       svpassword : new FormControl('',[Validators.required]),
     })
   }
@@ -34,6 +36,10 @@ export class SignupPage implements OnInit {
     this.selected = event.target.files[0];
     
   }
+  get getForm(){
+    return this.signForm.controls;
+  }
+
   signUp(){
     const filePath = this.selected['name'];
     const fileRef = this.storage.ref(filePath);

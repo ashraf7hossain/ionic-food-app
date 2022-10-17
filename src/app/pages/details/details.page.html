@@ -13,21 +13,34 @@
       unde eligendi culpa?
     </p>
     <div class="shopping">
-      <button [ngClass] = "{active: toggle}" (click) = "addToCart()">
-        <ion-icon name = "cart"></ion-icon>
+      <button [ngClass]="{active: toggle}" (click)="addToCart()">
+        <ion-icon name="cart"></ion-icon>
       </button>
-      <button (click) = "buyNow()">
+      <button (click)="buyNow()">
         Buy Now
       </button>
     </div>
   </div>
 </ion-content>
-<div class="buynow-modal" [ngClass] = "{active: buynow}">
-  <ion-icon name = "close-outline" (click) = "buyNow()"></ion-icon>
+<div class="modal-backdrop" [ngClass]="{active: buynow}"></div>
+<div class="buynow-modal" [ngClass]="{active: buynow}">
+  <ion-icon name="close-outline" (click)="buyNow()"></ion-icon>
   <div class="buynow-details">
-
+    <h3>
+      {{ currentProduct.name }}
+    </h3>
+    <div class="quant-btn">
+      <ion-icon (click)="changeQuantity(-1)" name="remove-circle-outline"></ion-icon>
+      <p>{{ currentProduct.quantity }}</p>
+      <ion-icon (click)="changeQuantity(1)" name="add-circle-outline"></ion-icon>
+    </div>
   </div>
-  <button class="confirm">
-    Confirm Purchase
+   <div class="total">
+    <h1>Total</h1>
+    <h1>{{ currentProduct.price * currentProduct.quantity }}</h1>
+   </div>
+  <button (click) = "addToCart()" class="confirm" id = "open-modal">
+    Go To Checkout
   </button>
 </div>
+<app-cart-modal></app-cart-modal>

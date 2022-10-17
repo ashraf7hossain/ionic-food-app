@@ -5,6 +5,8 @@ import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
 // import { Observable, map, BehaviorSubject} from 'rxjs';
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -13,7 +15,6 @@ import { OverlayEventDetail } from '@ionic/core/components';
 export class HomePage implements OnInit{
 
   @ViewChild(IonModal) modal: IonModal;
-
   products:any[] = [];
   tempProducts:any[] = [];
   cart:any[] = [];
@@ -24,7 +25,8 @@ export class HomePage implements OnInit{
     'all' : true,
     'food' : false,
     'drink' : false
-  }
+  };
+  search:string = "";
 
   constructor(private http: HttpClient) {}
 

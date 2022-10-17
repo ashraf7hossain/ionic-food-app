@@ -1,37 +1,36 @@
 <app-header></app-header>
 <app-back-button></app-back-button>
 
-<ion-content>
+<ion-content class="ion-padding">
+    <h1>
+        welcome
+    </h1>
+    <h3>
+        Sign in to continue
+    </h3>
 
-    <div class="login-section ion-padding">
-        <div class="heading ion-padding">
-            <h1>Welcome To F For Food</h1>
-        <p>Sign in to Continue</p>
-        </div>
-
-        <form [formGroup] = "loginForm" class="login-form" (ngSubmit) = "login()">
-            <div class="form-input">
-                <ion-icon name="mail-outline"></ion-icon>
-                <ion-item>
-                    <ion-label position="floating">
-                        Email
-                    </ion-label>
-                    <ion-input formControlName = "lemail" type="email"></ion-input>
-                </ion-item>
+    <div class="login-section">
+        <h1 *ngIf = "wrong">
+            wrong credentials
+        </h1>
+        <form [formGroup] = "loginForm"  action="" (ngSubmit) = "login()">
+            <div class="form-field">
+                <label [ngClass] = "focused[0] ? 'label-focused' : '' " for="">
+                  Email
+                </label>
+                <input formControlName="lemail" type = "email" (focus) = "focused[0] = true" (blur) = "onFocused($event,0)">
             </div>
-            <div class="form-input">
-                <ion-icon name="lock-closed-outline"></ion-icon>
-                <ion-item>
-                    <ion-label position="floating">
-                        Password
-                    </ion-label>
-                    <ion-input formControlName = "lpassword" type="password"></ion-input>
-                </ion-item>
+            <div class="form-field">
+                <label [ngClass] = "focused[1] ? 'label-focused' : '' " for="">
+                  Password
+                </label>
+                <input formControlName="lpassword" type = "password" (focus) = "focused[1] = true" (blur) = "onFocused($event,1)">
             </div>
             <div class="action-button ion-padding">
-                <ion-button type = "submit" size="large" class="login-button" routerLink = "/login">Log in</ion-button>
-                <ion-button class="signup-button" size="large" fill="outline" (click) = "goto()">Sign Up</ion-button>
+                <ion-button [disabled] = "!loginForm.valid" type = "submit" size="large" class="login-button">Login</ion-button>
+                <ion-button class="signup-button" size="large" fill="outline" (click) = "goto()">sign up</ion-button>
             </div>
         </form>
     </div>
+
 </ion-content>

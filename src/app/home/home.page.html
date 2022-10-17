@@ -4,12 +4,22 @@
   <ion-item>
     <div class="top-section">
       <div class="search-group">
-        <input type="text" name="" id="" placeholder="searh all products...">
+        <input [(ngModel)] = "search" type="text" name="" id="" placeholder="searh all products...">
         <ion-icon name="search"></ion-icon>
       </div>
       <ion-icon class="notify" name="notifications-outline"></ion-icon>
     </div>
   </ion-item>
+
+  <ng-container *ngFor = "let product of products">
+
+    <div *ngIf = "search !== '' && product.name.toLowerCase().includes(search.toLowerCase())" class="search-options" [routerLink] = "['/details']" [queryParams] = "{'id' : product.id}">
+
+      {{ product.name }}
+
+    </div>
+
+  </ng-container>
 
   <ion-item>
     <div class="banner">
@@ -17,14 +27,17 @@
     </div>
   </ion-item>
 
-  <ion-item>
+  <!-- <ion-item>
     <ion-title>Categories</ion-title>
-  </ion-item>
+  </ion-item> -->
 
   <div class="category">
     <button class="btn" [ngClass] = "{active: cls['all'] === true}" (click) = "filter('all')">All</button>
     <button class="btn" [ngClass] = "{active: cls['food']}" (click) = "filter('food')">Food</button>
     <button class="btn" [ngClass] = "{active: cls['drink']}" (click) = "filter('drink')">Drink</button>
+    <button class="btn" [ngClass] = "{active: cls['food']}" (click) = "filter('food')">Fast Food</button>
+    <button class="btn" [ngClass] = "{active: cls['drink']}" (click) = "filter('drink')">Cold Drink</button>
+
   </div>
 
   <!-- products section -->

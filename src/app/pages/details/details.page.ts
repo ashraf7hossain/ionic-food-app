@@ -38,5 +38,8 @@ export class DetailsPage implements OnInit {
   buyNow(){
     this.buynow = !this.buynow;
   }
+  changeQuantity(val:number){
+    this.prd.changeQuantity(this.currentProduct,val);
+  }
 
 }

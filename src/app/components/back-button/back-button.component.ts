@@ -13,6 +13,7 @@ export class BackButtonComponent implements OnInit {
   ngOnInit() {}
 
   goBack(){
+    console.log("back button pressed");
     this.loc.back();
   }
 

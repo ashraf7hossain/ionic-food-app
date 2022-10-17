@@ -1,0 +1,76 @@
+<app-navbar></app-navbar>
+<ion-content class="ion-padding">
+  <div class="order-item" *ngFor="let order of cart">
+    <img [src]="order.img" alt="image">
+    <div class="order-info">
+      <h5>{{order.name}}</h5>
+      <h5>Price ${{ order.price }}</h5>
+    </div>
+    <div class="change-btn">
+      <ion-icon (click)="changeQuantity(order,-1)" name="remove-circle-outline"></ion-icon>
+      <p>
+        {{ order.quantity }}
+      </p>
+      <ion-icon (click)="changeQuantity(order,1)" name="add-circle-outline"></ion-icon>
+    </div>
+  </div>
+  <hr>
+
+  <div class="total">
+    <h5>Total</h5>
+    <h5>${{ total }}</h5>
+  </div>
+
+  <div style="display: flex; justify-content:center;">
+    <button class="confirm-cart" color="primary" expand="block" (click)="confirm()">
+      Confirm Your Your Order
+    </button>
+  </div>
+</ion-content>
+
+
+
+<ion-modal [isOpen]="isModalOpen">
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancelOrderModal()">
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary"> Order Page </ion-title>
+  </ion-toolbar>
+
+  <ng-template>
+    <form action="" [formGroup]="orderForm" (ngSubmit)="orderSubmit()" class="order-form">
+      <!-- <div> -->
+      <div class="input-group">
+        <label for="delivery">
+          delivery
+          <sup *ngIf = "!orderForm.get('delivery').valid">*</sup>
+        </label>
+
+        <br>
+        <input formControlName="delivery" type="text" class="form-control" id="delivery" />
+      </div>
+      <div class="input-group">
+        <label for="city">
+          city
+          <sup *ngIf = "!orderForm.get('city').valid">*</sup>
+
+        </label><br>
+        <input formControlName="city" type="text" class="form-control" id="city" />
+      </div>
+      <div class="input-group">
+        <label for="zip">zip code
+          <sup *ngIf = "!orderForm.get('zip').valid">*</sup>
+        </label><br>
+        <input formControlName="zip" type="text" class="form-control" id="zip" />
+        <!-- </div> -->
+      </div>
+      <button [disabled] = "!orderForm.valid" type="submit" class="payment-btn">continue</button>
+    </form>
+  </ng-template>
+
+
+</ion-modal>

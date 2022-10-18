@@ -1,76 +1,149 @@
-<app-navbar></app-navbar>
+<!-- <app-nav></app-nav> -->
+<app-header></app-header>
+<app-back-button></app-back-button>
 <ion-content class="ion-padding">
-  <div class="order-item" *ngFor="let order of cart">
-    <img [src]="order.img" alt="image">
-    <div class="order-info">
-      <h5>{{order.name}}</h5>
-      <h5>Price ${{ order.price }}</h5>
+  <h1 style="text-align: center;">Your Cart</h1>
+  <ng-container *ngIf="cart.length === 0; else hasCart">
+    <img
+      src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-online-business-vector-icon-template-vector-id861576608?k=20&m=861576608&s=612x612&w=0&h=UgHaPYlYrsPTO6BKKTzizGQqFgqEnn7eYK9EOA16uDs="
+      alt="" />
+  </ng-container>
+  <ng-template #hasCart>
+    <div class="order-item" *ngFor="let order of cart">
+      <img [src]="order.img" alt="image">
+      <div class="order-info">
+        <h5>{{order.name}}</h5>
+        <h5>Price ${{ order.price }}</h5>
+      </div>
+      <div class="change-btn">
+        <ion-icon (click)="changeQuantity(order,-1)" name="remove-circle-outline"></ion-icon>
+        <p>
+          {{ order.quantity }}
+        </p>
+        <ion-icon (click)="changeQuantity(order,1)" name="add-circle-outline"></ion-icon>
+      </div>
     </div>
-    <div class="change-btn">
-      <ion-icon (click)="changeQuantity(order,-1)" name="remove-circle-outline"></ion-icon>
-      <p>
-        {{ order.quantity }}
-      </p>
-      <ion-icon (click)="changeQuantity(order,1)" name="add-circle-outline"></ion-icon>
-    </div>
-  </div>
+  </ng-template>
   <hr>
 
-  <div class="total">
-    <h5>Total</h5>
-    <h5>${{ total }}</h5>
-  </div>
+  <ng-container *ngIf="cart.length > 0">
+    <div class="total">
+      <h5>Total</h5>
+      <h5>${{ total }}</h5>
+    </div>
 
-  <div style="display: flex; justify-content:center;">
-    <button class="confirm-cart" color="primary" expand="block" (click)="confirm()">
-      Confirm Your Your Order
-    </button>
-  </div>
+    <div style="display: flex; justify-content:center;">
+      <button class="confirm-cart" color="primary" expand="block" (click)="confirm()">
+        Confirm Your Your Order
+      </button>
+    </div>
+  </ng-container>
 </ion-content>
 
 
+<!-- <ion-content>
+  <ion-modal [isOpen] = "isModalOpen">
+
+  </ion-modal>
+</ion-content> -->
 
 <ion-modal [isOpen]="isModalOpen">
-
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="cancelOrderModal()">
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title color="primary"> Order Page </ion-title>
-  </ion-toolbar>
-
   <ng-template>
-    <form action="" [formGroup]="orderForm" (ngSubmit)="orderSubmit()" class="order-form">
-      <!-- <div> -->
-      <div class="input-group">
-        <label for="delivery">
-          delivery
-          <sup *ngIf = "!orderForm.get('delivery').valid">*</sup>
-        </label>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancelOrderModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Your Order</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <form action="" [formGroup]="orderForm" (ngSubmit)="orderSubmit()" class="order-form">
+        <!-- <div> -->
+        <div class="input-group">
+          <label for="delivery">
+            delivery
+            <sup *ngIf="!orderForm.get('delivery').valid">*</sup>
+          </label>
 
-        <br>
-        <input formControlName="delivery" type="text" class="form-control" id="delivery" />
-      </div>
-      <div class="input-group">
-        <label for="city">
-          city
-          <sup *ngIf = "!orderForm.get('city').valid">*</sup>
+          <br>
+          <input formControlName="delivery" type="text" class="form-control" id="delivery" />
+        </div>
+        <div class="input-group">
+          <label for="city">
+            city
+            <sup *ngIf="!orderForm.get('city').valid">*</sup>
 
-        </label><br>
-        <input formControlName="city" type="text" class="form-control" id="city" />
-      </div>
-      <div class="input-group">
-        <label for="zip">zip code
-          <sup *ngIf = "!orderForm.get('zip').valid">*</sup>
-        </label><br>
-        <input formControlName="zip" type="text" class="form-control" id="zip" />
-        <!-- </div> -->
-      </div>
-      <button [disabled] = "!orderForm.valid" type="submit" class="payment-btn">continue</button>
-    </form>
+          </label><br>
+          <input formControlName="city" type="text" class="form-control" id="city" />
+        </div>
+        <div class="input-group">
+          <label for="zip">zip code
+            <sup *ngIf="!orderForm.get('zip').valid">*</sup>
+          </label><br>
+          <input formControlName="zip" type="text" class="form-control" id="zip" />
+          <!-- </div> -->
+        </div>
+        <button [disabled]="!orderForm.valid" type="submit" class="payment-btn">continue</button>
+      </form>
+    </ion-content>
   </ng-template>
+</ion-modal>
+<ion-modal [isOpen]="isPaymentOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancelPaymentModal()">
+            <ion-icon name="close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Your Payment Method</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <form [formGroup]="paymentForm" (ngSubmit)="placeOrder()">
+        <div class="input-group">
+          <label for="zip">Card
+            <sup *ngIf="!paymentForm.get('card').valid">*</sup>
+          </label><br>
+          <input formControlName="card" type="text" class="form-control" id="zip" />
+        </div>
+        <button [disabled]="!paymentForm.valid" class="payment-btn">Place Order</button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+<ion-modal [isOpen]="success">
+  <div class="success">
+    <ng-template>
+      <ion-content>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-button (click)="cancelSuccess()">
+                <ion-icon name="close-outline"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-title>Your Order</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <div class="show-up">
 
+            <div class="img-div">
+              <img
+            src="https://media.istockphoto.com/vectors/paid-success-payment-approved-notice-icon-vector-flat-bill-tax-pay-vector-id1271278705?k=20&m=1271278705&s=612x612&w=0&h=0YdsBj21lQdzQU1rUE79Vp5P2HczAG0E30DZRlCT0no="
+            alt="">
+            </div>
 
+          <h1> order successfully placed </h1>
+          <button class="payment-btn" (click) = "cancelSuccess()">
+            HOME
+          </button>
+        </div>
+      </ion-content>
+    </ng-template>
+  </div>
 </ion-modal>

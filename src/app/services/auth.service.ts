@@ -21,6 +21,11 @@ export class AuthService {
       }
     });
   }
+  registerOrder(order:any){
+    this.http.post(`${environment.baseURL}/orders.json`,order).subscribe(res =>{
+      console.log(res)
+    });
+  }
   login(user:any){
     let currentUser = this.users.find(usr => (usr.email === user.email && usr.password === user.password));
     if(currentUser !== undefined){

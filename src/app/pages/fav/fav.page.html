@@ -1,0 +1,27 @@
+<app-header></app-header>
+<app-back-button></app-back-button>
+
+
+<!-- products section -->
+<ion-content>
+  <h1 style="text-align: center;"> Your Favorites </h1>
+  <ion-grid>
+    <ion-row>
+      <ng-container *ngIf="fav.length > 0; else otherwise">
+        <ng-container *ngFor="let product of fav">
+          <ion-col size="6">
+            <img [routerLink]="['/details']" [queryParams]="{'id' : product.id}" class="card-img" [src]="product.img">
+            <h5> {{ product.name }} </h5>
+            <h5> {{ product.price }} </h5>
+          </ion-col>
+        </ng-container>
+      </ng-container>
+      <ng-template #otherwise>
+        <img
+          src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-online-business-vector-icon-template-vector-id861576608?k=20&m=861576608&s=612x612&w=0&h=UgHaPYlYrsPTO6BKKTzizGQqFgqEnn7eYK9EOA16uDs="
+          alt="">
+      </ng-template>
+    </ion-row>
+  </ion-grid>
+  <!-- products section ends -->
+</ion-content>

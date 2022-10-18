@@ -44,10 +44,10 @@
    <ion-grid>
     <ion-row>
       <ng-container *ngFor = "let product of products">
-        <ion-col size = "6" [routerLink] = "['/details']" [queryParams] = "{'id' : product.id}">
-          <img class="card-img" [src] = "product.img">
+        <ion-col size = "6">
+          <img  [routerLink] = "['/details']" [queryParams] = "{'id' : product.id}" class="card-img" [src] = "product.img">
           <h5> {{ product.name }} </h5>
-          <h4 style="color: #ff7465; font-weight: bold;"> ${{ product.price }}</h4>
+          <app-input [product] = "product" ></app-input>
         </ion-col>
       </ng-container>
     </ion-row>

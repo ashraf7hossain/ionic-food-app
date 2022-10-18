@@ -1,6 +1,4 @@
-<div class="form-field">
-  <label [ngClass] = "focused ? 'label-focused' : '' " for="">
-    {{label}}
-  </label>
-  <input [type] = "type" (focus) = "focused = true" (blur) = "onFocused($event)">
+<div class="price-icon">
+  <h4 style="color: #ff7465; font-weight: bold;"> ${{ product.price }}</h4>
+<ion-icon (click) = "addToFav(product)" [name] = "heart"></ion-icon>
 </div>

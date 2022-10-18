@@ -1,6 +1,8 @@
 ion-content{
     --background: linear-gradient(0deg,rgba(226,27,212,0.7),rgba(226,27,212,0.1));
 }
+
+
 .login-section{
     height: 85vh;
     width: 100%;
@@ -11,6 +13,7 @@ ion-content{
     bottom: 0;
     position: fixed;
     margin: auto;
+    overflow-y: auto;
     border-top-left-radius: 46px;
     border-top-right-radius: 46px;
     animation: bottom-to-top 3s;
@@ -21,7 +24,7 @@ ion-content{
             font-weight: bolder;
         }
         p{
-            margin-top: 20px;
+            margin-top: 10px;
             font-size: 1rem;
             color: #7b7b7b;
         }
@@ -60,12 +63,14 @@ ion-content{
             .login-button{
                 width: 100%;
                 text-align: center;
+                --border-radius: 50px;
             }
             p{
                 color: #7b7b7b;
             }
             .signup-button{
                 width: 100%;
+                --border-radius: 50px;
             }
         }
     }

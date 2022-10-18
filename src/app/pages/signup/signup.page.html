@@ -3,61 +3,63 @@
 
 <ion-content>
 
-    <div class="login-section ion-padding">
-        <div class="heading ion-padding">
-            <h1>Welcome</h1>
-            <p>Sign UP to Continue</p>
+    <div class="container">
+        <div class="login-section ion-padding">
+            <div class="heading ion-padding">
+                <h1>Welcome</h1>
+                <p>Sign UP to Continue</p>
+            </div>
+    
+            <form [formGroup]="signForm" class="login-form ion-padding" (ngSubmit)="signUp()">
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">
+                            Name
+                        </ion-label>
+                        <ion-input formControlName="sname" type="text"></ion-input>
+                    </ion-item>
+                </div>
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">
+                            Email
+                        </ion-label>
+                        <ion-input formControlName="semail" type="email"></ion-input>
+                    </ion-item>
+                    <p class="warning" *ngIf = "getForm.semail.touched && getForm.semail.errors">
+                       Invalid Email
+                    </p>
+    
+                </div>
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">
+                            Password
+                        </ion-label>
+                        <ion-input formControlName="spassword" type="password"></ion-input>
+                    </ion-item>
+                </div>
+                <div class="form-input">
+                    <ion-item>
+                        <ion-label position="floating">
+                            Verify Password
+                        </ion-label>
+                        <ion-input formControlName="svpassword" type="password"></ion-input>
+                    </ion-item>
+                    <p class="warning" *ngIf = "getForm.spassword.value !== getForm.svpassword.value && getForm.svpassword.touched && getForm.svpassword !== '' ">
+                        Password doesn't match
+                    </p>
+                </div>
+                <div style="display: flex; flex-direction:column;">
+                    <ion-label>Choose Your Profile Picture</ion-label>
+                    <ion-input type="file" (change)="getSelected($event)"></ion-input>
+                </div>
+                <div class="action-button ion-padding">
+                    <ion-button [disabled] = "!signForm.valid" type="submit" size="large" class="login-button">Sign Up</ion-button>
+                    <ion-button class="signup-button" size="large" fill="outline" routerLink="/login">Login</ion-button>
+                </div>
+            </form>
         </div>
-
-        <form [formGroup]="signForm" class="login-form ion-padding" (ngSubmit)="signUp()">
-            <div class="form-input">
-                <ion-item>
-                    <ion-label position="floating">
-                        Name
-                    </ion-label>
-                    <ion-input formControlName="sname" type="text"></ion-input>
-                </ion-item>
-            </div>
-            <div class="form-input">
-                <ion-item>
-                    <ion-label position="floating">
-                        Email
-                    </ion-label>
-                    <ion-input formControlName="semail" type="email"></ion-input>
-                </ion-item>
-                <p class="warning" *ngIf = "getForm.semail.touched && getForm.semail.errors">
-                   Invalid Email
-                </p>
-
-            </div>
-            <div class="form-input">
-                <ion-item>
-                    <ion-label position="floating">
-                        Password
-                    </ion-label>
-                    <ion-input formControlName="spassword" type="password"></ion-input>
-                </ion-item>
-            </div>
-            <div class="form-input">
-                <ion-item>
-                    <ion-label position="floating">
-                        Verify Password
-                    </ion-label>
-                    <ion-input formControlName="svpassword" type="password"></ion-input>
-                </ion-item>
-                <p class="warning" *ngIf = "getForm.spassword.value !== getForm.svpassword.value && getForm.svpassword.touched && getForm.svpassword !== '' ">
-                    Password doesn't match
-                </p>
-            </div>
-            <div style="display: flex; flex-direction:column;">
-                <ion-label>Choose Your Profile Picture</ion-label>
-                <ion-input type="file" (change)="getSelected($event)"></ion-input>
-            </div>
-            <div class="action-button ion-padding">
-                <ion-button [disabled] = "!signForm.valid" type="submit" size="large" class="login-button">Sign Up</ion-button>
-                <ion-button class="signup-button" size="large" fill="outline" routerLink="/login">Login</ion-button>
-            </div>
-        </form>
+        <img [src]="downloadURL | async" alt="">
     </div>
-    <img [src]="downloadURL | async" alt="">
 </ion-content>

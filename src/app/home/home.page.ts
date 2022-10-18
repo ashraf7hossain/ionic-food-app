@@ -27,6 +27,7 @@ export class HomePage implements OnInit{
     'drink' : false
   };
   search:string = "";
+  heart:string = "heart-outline";
 
   constructor(private http: HttpClient) {}
 
@@ -54,9 +55,6 @@ export class HomePage implements OnInit{
     }
     this.cartCount += 1;
     this.cart.push(item);
-  }
-  cancel() {
-    this.modal.dismiss(null, 'cancel');
   }
   confirm() {
     this.modal.dismiss(this.name, 'confirm');
@@ -87,12 +85,8 @@ export class HomePage implements OnInit{
     this.products = this.products.filter(prod => prod.category === category);
   }
 
+  
 
-  onWillDismiss(event: Event) {
-    const ev = event as CustomEvent<OverlayEventDetail<string>>;
-    if (ev.detail.role === 'confirm') {
-      this.message = `Hello, ${ev.detail.data}!`;
-    }
-  }
+
 
 }

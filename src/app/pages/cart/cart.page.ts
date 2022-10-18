@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+
 import { ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
@@ -12,15 +14,21 @@ import { ProductService } from 'src/app/services/product.service';
 export class CartPage implements OnInit {
 
   isModalOpen:boolean = false;
+  isPaymentOpen:boolean = false;
+  success:boolean = false;
+
+  currentUser:any = {};
 
   constructor( private prd: ProductService,
                private auth: AuthService,
-               private toast: ToastController
+               private toast: ToastController,
+               private route: Router
                ) { }
   cart: any[] = [];
   total: number = 0;
 
   orderForm: FormGroup = new FormGroup({});
+  paymentForm: FormGroup = new FormGroup({});
   ngOnInit() {
     this.prd.currentCart.subscribe(res => {
       this.cart = res;
@@ -31,6 +39,10 @@ export class CartPage implements OnInit {
       city: new FormControl('',[Validators.required]),
       zip: new FormControl('',[Validators.required]),
     });
+    this.paymentForm = new FormGroup({
+      card: new FormControl('',[Validators.required])
+    });
+    this.auth.currentUser.subscribe(res => this.currentUser = res);
   }
 
   changeQuantity(item:any, value:number){
@@ -40,8 +52,17 @@ export class CartPage implements OnInit {
   cancelOrderModal(){
     this.isModalOpen = false;
   }
+  cancelPaymentModal(){
+    this.isPaymentOpen = false;
+  }
+  cancelSuccess(){
+    // this.route.navigate(['home']);
+    this.success = false;
+    // this.isModalOpen = false;
+    // this.isPaymentOpen = false;
+    // console.log(this.success,this.isModalOpen,this.isPaymentOpen);
+  }
   confirm() {
-    // this.modal.dismiss(this.name, 'confirm');
     this.auth.currentUser.subscribe(async res => {
       if(res.hasOwnProperty('email')){
         this.isModalOpen = true;
@@ -58,11 +79,25 @@ export class CartPage implements OnInit {
     });
     await tst.present();
   }
-  async orderSubmit(){
-    await this.presentToast('top' , "Order Succesfully placed");
-    this.orderForm.reset();
+  orderSubmit(){
+    // await this.presentToast('top' , "Order Succesfully placed");
+    // this.orderForm.reset();
+    this.isPaymentOpen = true;
     // console.log(this.orderForm.value);
-
+  }
+  placeOrder(){
+    // e.preventDefault();
+    let order = {
+      item: [...this.cart],
+      total: this.total,
+      userId: this.currentUser.id,
+      name: this.orderForm.value['delivery'],
+      card: this.paymentForm.value['card'],
+      address: this.orderForm.value['city']+","+this.orderForm.value['zip'],
+      date: Date.now()
+    }
+    this.auth.registerOrder(order);
+    this.success = true;
   }
 
 }

@@ -1,45 +1,57 @@
-ion-content{
-    .details{
-        img{
+ion-content {
+    .details {
+        margin-bottom: 50px;
+
+        img {
             border-radius: 20px;
             padding: 5px 0px;
         }
-        .details-top{
+
+        .details-top {
             padding: 5px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            h1{
+
+            h1 {
                 font-size: 2.35rem;
                 font-weight: bold;
             }
-            h3{
+
+            h3 {
                 font-size: 2rem;
                 color: #ff7465;
                 font-weight: bold;
             }
         }
-        p{
+
+        p {
             padding: 5px 15px;
             font-size: 1.23rem;
             color: grey;
         }
-        .shopping{
+
+        .shopping {
             padding: 5px 15px;
-            button{
+
+            button {
                 padding: 20px;
-                &:nth-child(1){
+
+                &:nth-child(1) {
+                    padding: 10px;
                     font-size: 2rem;
                     color: #ff7465;
                     border-radius: 50%;
                     margin-right: 20px;
                 }
-                &:nth-child(1).active{
+
+                &:nth-child(1).active {
                     color: white;
                     background-color: #ff7465;
                 }
-                &:nth-child(2){
-                    padding: 30px 80px;
+
+                &:nth-child(2) {
+                    padding: 20px 60px;
                     font-size: 20px;
                     border-radius: 50px;
                     color: white;
@@ -49,8 +61,9 @@ ion-content{
         }
     }
 }
-.buynow-modal{
-    height: 30vh;
+
+.buynow-modal {
+    height: 40vh;
     width: 100%;
     padding: 5px 15px;
     background-color: #fff;
@@ -62,60 +75,72 @@ ion-content{
     margin: auto;
     display: none;
     transition: linear all 1s;
-    ion-icon{
+
+    ion-icon {
         font-size: 2.35rem;
     }
-    .buynow-details{
+
+    .buynow-details {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        .quant-btn{
+
+        .quant-btn {
             display: flex;
             align-items: center;
-            p{
+
+            p {
                 margin: 0px 10px;
             }
-            ion-icon{
+
+            ion-icon {
                 color: #ff7465;
             }
         }
     }
-    .total{
+
+    .total {
         display: flex;
         justify-content: space-between;
     }
-    .confirm{
-        padding: 25px 60px;
+
+    .confirm {
+        padding: 15px;
         font-size: 1.5rem;
         border-radius: 50px;
-        font-weight: bold;
+        font-weight: 400;
         color: white;
         background-color: #ff7465;
     }
 }
-.modal-backdrop{
+
+.modal-backdrop {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     height: 100%;
     width: 100%;
     display: none;
 }
-.modal-backdrop.active{
+
+.modal-backdrop.active {
     display: block;
 }
-.buynow-modal.active{
+
+.buynow-modal.active {
     display: flex;
     justify-content: center;
     flex-direction: column;
     animation: bottom-top 0.6s;
 }
+
 @keyframes bottom-top {
-    from{
+    from {
         transform: translateY(100%);
-    }    
-    to{
+    }
+
+    to {
         transform: translate(0%);
     }
 }

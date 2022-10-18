@@ -9,10 +9,14 @@
     </div>
       
       <div>
-        <ion-icon name="person-circle-outline"></ion-icon>
-      <ion-title *ngIf="currentUser.hasOwnProperty('email')">
-        {{ currentUser.name }}
-      </ion-title>
+          <ion-avatar *ngIf = "currentUser.hasOwnProperty('email')"  slot="start">
+            <img alt="Silhouette of a person's head" [src]="currentUser.img" />
+          </ion-avatar>
+          <ion-label>{{ currentUser.name }}</ion-label>
+        <ion-icon *ngIf = "!currentUser.hasOwnProperty('email')" name = "person-circle">
+
+        </ion-icon>
+
       </div>
     </div>
     
@@ -23,8 +27,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-icon name="paper-plane" slot="start"></ion-icon>
-        <ion-label>Outbox</ion-label>
+        <ion-icon name="heart" slot="start"></ion-icon>
+        <ion-label [routerLink]="['/fav']" (click) = "close()">Favorites</ion-label>
       </ion-item>
       <ion-item *ngIf="!currentUser.hasOwnProperty('email')">
         <ion-icon name="log-in-outline" slot="start"></ion-icon>

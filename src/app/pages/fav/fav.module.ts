@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { CartPageRoutingModule } from './cart-routing.module';
+import { FavPageRoutingModule } from './fav-routing.module';
 
-import { CartPage } from './cart.page';
-import { NavComponent } from 'src/app/components/nav/nav.component';
+import { FavPage } from './fav.page';
+
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { BackButtonComponent } from 'src/app/components/back-button/back-button.component';
 
@@ -17,9 +16,8 @@ import { BackButtonComponent } from 'src/app/components/back-button/back-button.
     CommonModule,
     FormsModule,
     IonicModule,
-    CartPageRoutingModule,
-    ReactiveFormsModule
+    FavPageRoutingModule
   ],
-  declarations: [CartPage,HeaderComponent,BackButtonComponent]
+  declarations: [FavPage,HeaderComponent,BackButtonComponent]
 })
-export class CartPageModule {}
+export class FavPageModule {}

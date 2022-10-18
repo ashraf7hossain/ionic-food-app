@@ -46,16 +46,20 @@
 <!-- confirm modal -->
 <ion-modal [isOpen]="isModalOpen">
 
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button (click)="cancelOrderModal()">
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title color="primary"> Order Page </ion-title>
-  </ion-toolbar>
-
   <ng-template>
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-button (click)="cancelOrderModal()">
+            <ion-icon name = "close-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <ion-title>Your Order</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    
     <form action="" [formGroup]="orderForm" (ngSubmit)="orderSubmit()" class="order-form">
       <!-- <div> -->
       <div class="input-group">

@@ -1,35 +1,43 @@
-.order-item{
+.order-item {
     display: flex;
     justify-content: space-between;
     margin-top: 30px;
-    img{
+
+    img {
         width: 100px;
         border-radius: 10px;
     }
-    .order-info{
+
+    .order-info {
         text-align: left;
-        h5{
+
+        h5 {
             font-weight: bold;
             font-size: 22px;
-            &:nth-child(2){
+
+            &:nth-child(2) {
                 font-weight: 300;
                 color: grey;
             }
         }
     }
 }
+
 .change-btn {
     // margin-left: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    p{
+
+    p {
         margin: 10px;
         color: grey;
     }
-    ion-icon{
+
+    ion-icon {
         color: #ff7465;
-        font-size: 2rem;;
+        font-size: 2rem;
+        ;
     }
 }
 
@@ -48,11 +56,101 @@
     display: flex;
     justify-content: space-between;
     color: grey;
-    h5{
+
+    h5 {
         font-weight: bold;
-        &:nth-child(2){
+
+        &:nth-child(2) {
             font-weight: 300;
             color: grey;
         }
+    }
+}
+
+input:focus {
+    border: 2px solid #ff7465;
+}
+
+.input-group {
+    // display: inline-flex;
+    // transform: translateX(50%);
+    // flex-direction: column;
+    // justify-content: center;
+    width: 80%;
+    margin: 0px auto;
+    display: flex;
+    flex-direction: column;
+
+    label {
+        font-size: 20px;
+        margin: 10px 0px;
+
+        sup {
+            color: red;
+            font-weight: bolder;
+        }
+    }
+}
+
+.form-control {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    height: 50px;
+    background-color: #efefef;
+
+    &:focus {
+        outline: 2px #ff7465;
+    }
+}
+
+.payment-btn {
+    color: white;
+    font-weight: bold;
+    border-radius: 50px;
+    font-size: 1.56rem;
+    background-color: #ff7465;
+    width: 80%;
+    height: 60px;
+    padding: 20px 40px;
+    margin: 64px 42px;
+}
+
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.show-up {
+    h1{
+        text-align: center;
+    }
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    .img-div{
+        width: 375px;
+        height: 308px;
+        img {
+            width: 100%;
+            animation: grow 0.9s;
+        }
+    }
+  
+}
+
+.btn-lg {
+    // width: 100%;
+    border-radius: 50px;
+}
+
+@keyframes grow {
+    from {
+        width: 0%;
+    }
+
+    to {
+        width: 100%;
     }
 }

@@ -3,8 +3,10 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
+
 import { NavComponent } from './components/nav/nav.component';
 import { HeaderComponent } from '../components/header/header.component';
+import { InputComponent } from '../components/input/input.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -20,6 +22,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     HomePageRoutingModule,
     HttpClientModule
   ],
-  declarations: [HomePage,HeaderComponent]
+  declarations: [HomePage,HeaderComponent,InputComponent]
 })
 export class HomePageModule {}

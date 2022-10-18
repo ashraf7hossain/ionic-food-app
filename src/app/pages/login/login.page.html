@@ -2,35 +2,40 @@
 <app-back-button></app-back-button>
 
 <ion-content class="ion-padding">
-    <h1>
-        welcome
-    </h1>
-    <h3>
-        Sign in to continue
-    </h3>
-
-    <div class="login-section">
-        <h1 *ngIf = "wrong">
-            wrong credentials
+    <div class="container">
+        <h1>
+            welcome
         </h1>
-        <form [formGroup] = "loginForm"  action="" (ngSubmit) = "login()">
-            <div class="form-field">
-                <label [ngClass] = "focused[0] ? 'label-focused' : '' " for="">
-                  Email
-                </label>
-                <input formControlName="lemail" type = "email" (focus) = "focused[0] = true" (blur) = "onFocused($event,0)">
-            </div>
-            <div class="form-field">
-                <label [ngClass] = "focused[1] ? 'label-focused' : '' " for="">
-                  Password
-                </label>
-                <input formControlName="lpassword" type = "password" (focus) = "focused[1] = true" (blur) = "onFocused($event,1)">
-            </div>
-            <div class="action-button ion-padding">
-                <ion-button [disabled] = "!loginForm.valid" type = "submit" size="large" class="login-button">Login</ion-button>
-                <ion-button class="signup-button" size="large" fill="outline" (click) = "goto()">sign up</ion-button>
-            </div>
-        </form>
-    </div>
+        <h3>
+            Sign in to continue
+        </h3>
 
+        <div class="login-section">
+            <h1 *ngIf="wrong">
+                wrong credentials
+            </h1>
+            <form [formGroup]="loginForm" action="" (ngSubmit)="login()">
+                <div class="form-field">
+                    <label [ngClass]="focused[0] ? 'label-focused' : '' " for="">
+                        Email
+                    </label>
+                    <input formControlName="lemail" type="email" (focus)="focused[0] = true"
+                        (blur)="onFocused($event,0)">
+                </div>
+                <div class="form-field">
+                    <label [ngClass]="focused[1] ? 'label-focused' : '' " for="">
+                        Password
+                    </label>
+                    <input formControlName="lpassword" type="password" (focus)="focused[1] = true"
+                        (blur)="onFocused($event,1)">
+                </div>
+                <div class="action-button ion-padding">
+                    <ion-button [disabled]="!loginForm.valid" type="submit" size="large" class="login-button">Login
+                    </ion-button>
+                    <ion-button class="signup-button" size="large" fill="outline" (click)="goto()">sign up</ion-button>
+                </div>
+            </form>
+        </div>
+
+    </div>
 </ion-content>

@@ -6,6 +6,8 @@ import { pipe } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { ToastController } from '@ionic/angular';
+
 
 
 
@@ -22,7 +24,8 @@ export class SignupPage implements OnInit {
   mail: string = "";
   validMail:any;
   constructor(private storage: AngularFireStorage,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private toast: ToastController) { }
 
   ngOnInit() {
     this.signForm = new FormGroup({
@@ -38,6 +41,15 @@ export class SignupPage implements OnInit {
   }
   get getForm(){
     return this.signForm.controls;
+  }
+
+  async presentToast(position: 'top' , message){
+    const tst = await this.toast.create({
+      message: message,
+      duration: 1500,
+      position: position
+    });
+    await tst.present();
   }
 
   signUp(){
@@ -57,8 +69,8 @@ export class SignupPage implements OnInit {
       finalize(() => {
         fileRef.getDownloadURL().subscribe(res => {
           userData = {...userData , img: res};
-          this.http.post(`${environment.baseURL}/users.json`,userData).subscribe(res2 => {
-            console.log(res2)
+          this.http.post(`${environment.baseURL}/users.json`,userData).subscribe(async res2 => {
+            await this.presentToast('top',"Sign Up Successfull");
           });
         });
       } )

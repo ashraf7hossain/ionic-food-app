@@ -8,22 +8,41 @@
 }
 
 
+.user-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 28px;
+    ion-avatar{
+        height: 81px;
+        width: 81px;
+        border: 5px solid white;
+    }
+    ion-label{
+        margin-left: 20px;
+        font-size: 30px;
+        text-transform: capitalize;
+        font-weight: bold;
+        color: white;
+    }
+}
+
 .menu-header-bg{
     position: relative;
-    height: 450px;
+    height: 240px;
     width: 100%;
     background: linear-gradient(90deg,#ff9665de 0%, #ff7465);
     box-shadow: 0px 1px 10px rgba(98,140,255,0.5);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: start;
+    align-items: flex-start;
     ion-icon{
         font-size: 100px;
         color: grey;
     }
 }
-.custom-shape-divider-bottom-1665635609 {
+.custom-shape-divider-bottom-1666173470 {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -33,14 +52,14 @@
     transform: rotate(180deg);
 }
 
-.custom-shape-divider-bottom-1665635609 svg {
+.custom-shape-divider-bottom-1666173470 svg {
     position: relative;
     display: block;
     width: calc(100% + 1.3px);
-    height: 150px;
+    height: 142px;
 }
 
-.custom-shape-divider-bottom-1665635609 .shape-fill {
+.custom-shape-divider-bottom-1666173470 .shape-fill {
     fill: #FFFFFF;
 }
 

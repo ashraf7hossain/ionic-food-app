@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -15,7 +15,8 @@ export class DetailsPage implements OnInit {
   buynow:boolean = false;
 
   constructor(private acr: ActivatedRoute,
-    private prd: ProductService) { }
+    private prd: ProductService,
+    private router: Router) { }
 
   ngOnInit() {
     this.acr.queryParams.subscribe(res => {
@@ -32,8 +33,13 @@ export class DetailsPage implements OnInit {
     });
   }
   addToCart(){
-    this.toggle = !this.toggle;
+    // this.toggle = !this.toggle;
     this.prd.addToCart(this.currentProduct);
+    // this.router.navigate(['cart']);
+  }
+  checkOut(){
+    this.prd.addToCart(this.currentProduct);
+    this.router.navigate(['cart']);
   }
   buyNow(){
     this.buynow = !this.buynow;

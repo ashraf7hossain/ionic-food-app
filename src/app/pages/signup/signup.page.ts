@@ -61,6 +61,8 @@ export class SignupPage implements OnInit {
       name : this.signForm.value['sname'],
       email : this.signForm.value['semail'],
       password : this.signForm.value['spassword'],
+      role: "user",
+      status: "active",
       img: ""
     }
 

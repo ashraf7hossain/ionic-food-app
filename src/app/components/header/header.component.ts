@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -7,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  @Input() title: string;
 
-  ngOnInit() {}
+  constructor(private auth: AuthService) { }
+
+  currentUser: any = {}
+
+  ngOnInit() {
+    this.auth.currentUser.subscribe(res =>{
+      this.currentUser = res;
+    });
+  }
 
 }

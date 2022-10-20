@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MenuController } from '@ionic/angular';
 
@@ -9,21 +9,32 @@ import { MenuController } from '@ionic/angular';
 })
 export class NavComponent implements OnInit {
 
-  currentUser:any = {};
+  currentUser: any = {};
+  mode: string = "moon";
 
-  constructor(private _auth: AuthService , private menu: MenuController) { }
+  constructor(private _auth: AuthService, private menu: MenuController,
+    private render: Renderer2) { }
 
   ngOnInit() {
     this._auth.currentUser.subscribe(res => {
       this.currentUser = res;
     });
-    
+
   }
-  logout(){
+  logout() {
     this._auth.logout();
   }
-  close(){
+  close() {
     this.menu.close();
+  }
+  changeTheme() {
+    if (this.mode === 'moon') {
+      this.render.addClass(document.body, 'body2');
+      this.mode = 'sunny';
+    } else {
+      this.mode = 'moon';
+      this.render.removeClass(document.body, 'body2');
+    }
   }
 
 }

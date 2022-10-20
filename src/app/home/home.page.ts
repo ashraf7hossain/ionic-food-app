@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { IonModal } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core/components';
+import { ProductService } from '../services/product.service';
 // import { Observable, map, BehaviorSubject} from 'rxjs';
 
 
@@ -18,6 +19,7 @@ export class HomePage implements OnInit{
   products:any[] = [];
   tempProducts:any[] = [];
   cart:any[] = [];
+  favs:any[] = [];
   message = "hello world";
   name:string;
   cartCount: number = 0;
@@ -29,7 +31,7 @@ export class HomePage implements OnInit{
   search:string = "";
   heart:string = "heart-outline";
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private prd: ProductService) {}
 
   slideOptions = {
     freeMode: true,
@@ -40,6 +42,7 @@ export class HomePage implements OnInit{
     pager: true
   }
   ngOnInit(){
+   this.prd.currentFavorite.subscribe(res => this.favs = res);
    this.http.get<any[]>(`${environment.baseURL}/products.json`).subscribe(res =>{
      let arr = Object.entries(res);
     for(let [x,y] of arr){
@@ -49,6 +52,8 @@ export class HomePage implements OnInit{
     console.log(this.products);
    });
   }
+
+  
   addToCart(item:any){
     if(this.cart.includes(item)){
       return;
@@ -84,9 +89,5 @@ export class HomePage implements OnInit{
     }
     this.products = this.products.filter(prod => prod.category === category);
   }
-
-  
-
-
 
 }

@@ -1,0 +1,42 @@
+<app-header></app-header>
+<app-back-button></app-back-button>
+<ion-content>
+
+  <div class="user-section">
+    <img [src]="currentUser.img" />
+    <form action="">
+
+      <div class="form-field">
+        <label [ngClass]="focused[0] ? 'label-focused' : '' " for="">
+          <ng-container *ngIf = "currentUser.hasOwnProperty('name')">
+            {{ currentUser.name}}
+          </ng-container>
+        </label>
+        <input type="name" (focus)="focused[0] = true" (blur)="onFocused($event,0)">
+      </div>
+      <div class="form-field">
+        <label [ngClass]="focused[1] ? 'label-focused' : '' " for="">
+          <ng-container *ngIf = "currentUser.hasOwnProperty('name')">
+            {{ currentUser.email}}
+          </ng-container>
+        </label>
+        <input type="email" (focus)="focused[1] = true" (blur)="onFocused($event,1)">
+      </div>
+      <div class="form-field">
+        <label [ngClass]="focused[2] ? 'label-focused' : '' " for="">
+          Password
+        </label>
+        <input type="password" (focus)="focused[2] = true" (blur)="onFocused($event,2)">
+      </div>
+
+      <ion-button type="submit" size="large" class="login-button">
+        Change
+      </ion-button>
+      <ion-button (click) = "logout()" size="large" class="login-button">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+
+    </form>
+  </div>
+
+</ion-content>

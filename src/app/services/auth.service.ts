@@ -17,6 +17,7 @@ export class AuthService {
     this.http.get<any>(`${environment.baseURL}/users.json`).subscribe(res => {
       let arr = Object.entries(res);
       for (let [x, y] of arr) {
+        y['id'] = x;
         this.users.push(y);
       }
     });

@@ -1,0 +1,26 @@
+<app-header title = "Your orders"></app-header>
+<app-back-button></app-back-button>
+<ion-content class="ion-padding">
+  <ng-container *ngIf="orders.length === 0; else hasOrder">
+    <img
+      src="https://media.istockphoto.com/vectors/empty-shopping-bag-icon-online-business-vector-icon-template-vector-id861576608?k=20&m=861576608&s=612x612&w=0&h=UgHaPYlYrsPTO6BKKTzizGQqFgqEnn7eYK9EOA16uDs="
+      alt="" />
+  </ng-container>
+  <ng-template #hasOrder>
+    <div class="order-item" *ngFor="let order of orders">
+      <img [src]="order.img" alt="image">
+      <div class="order-info">
+        <h5>{{order.name}}</h5>
+        <h5>Price ${{ order.price }} x {{ order.quantity }} </h5>
+      </div>
+    </div>
+  </ng-template>
+  <hr>
+
+  <ng-container *ngIf="orders.length > 0">
+    <div class="total">
+      <h5>Total</h5>
+      <h5>${{ total }}</h5>
+    </div>
+  </ng-container>
+</ion-content>

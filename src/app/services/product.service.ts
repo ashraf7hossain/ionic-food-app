@@ -13,14 +13,19 @@ export class ProductService {
 
   private cart = new BehaviorSubject<any[]>([]);
   private cartCount = new BehaviorSubject<number>(0);
+  private favCount = new BehaviorSubject<number>(0);
   private favorite = new BehaviorSubject<any[]>([]);
 
   currentCart = this.cart.asObservable();
   currentCartCount = this.cartCount.asObservable();
+  currentfavCount = this.favCount.asObservable();
   currentFavorite = this.favorite.asObservable();
 
   getAllProducts(): Observable<any> {
     return this.http.get<any[]>(`${environment.baseURL}/products.json`);
+  }
+  getAllOrders(): Observable<any>{
+    return this.http.get<any[]>(`${environment.baseURL}/orders.json`);
   }
   tempCount: number = 0;
   addToCart(product: any) {
@@ -53,6 +58,8 @@ export class ProductService {
 
     this.cartCount.next(this.tempCount);
   }
+
+
   addToFav(item: any) {
     let temp = [];
     this.currentFavorite.subscribe(res => {
@@ -65,7 +72,16 @@ export class ProductService {
     } else {
       temp = temp.filter(t => t !== item);
     }
-  
+    this.favCount.next(temp.length);
+    this.favorite.next(temp);
+  }
+  removeFromFav(item: any){
+    let temp = [];
+    this.currentFavorite.subscribe(res => {
+      temp = res;
+    });
+    temp = temp.filter(t => t !== item);
+    this.favCount.next(temp.length);
     this.favorite.next(temp);
   }
 }

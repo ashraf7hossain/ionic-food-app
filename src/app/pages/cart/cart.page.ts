@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -11,7 +11,7 @@ import { ProductService } from 'src/app/services/product.service';
   templateUrl: './cart.page.html',
   styleUrls: ['./cart.page.scss'],
 })
-export class CartPage implements OnInit {
+export class CartPage implements OnInit,OnDestroy {
 
   isModalOpen:boolean = false;
   isPaymentOpen:boolean = false;
@@ -44,6 +44,12 @@ export class CartPage implements OnInit {
     });
     this.auth.currentUser.subscribe(res => this.currentUser = res);
   }
+  ngOnDestroy(){
+    this.isModalOpen = false;
+    this.isPaymentOpen = false;
+    this.success = false;
+    console.log("cart page destory");
+  }
 
   changeQuantity(item:any, value:number){
     this.prd.changeQuantity(item,value);
@@ -56,7 +62,7 @@ export class CartPage implements OnInit {
     this.isPaymentOpen = false;
   }
   cancelSuccess(){
-    // this.route.navigate(['home']);
+    // this.route.navigate(['/home']);
     this.success = false;
     // this.isModalOpen = false;
     // this.isPaymentOpen = false;
@@ -97,6 +103,10 @@ export class CartPage implements OnInit {
       date: Date.now()
     }
     this.auth.registerOrder(order);
+    this.prd.getAllOrders();
+    console.log(order);
+    this.isModalOpen = false;
+    this.isPaymentOpen = false;
     this.success = true;
   }
 

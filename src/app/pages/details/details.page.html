@@ -1,3 +1,4 @@
+<app-header title="{{currentProduct.name}}"></app-header>
 <app-back-button></app-back-button>
 <ion-content>
   <div class="details">
@@ -8,9 +9,7 @@
     </div>
     <p>
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia reiciendis repudiandae possimus accusantium
-      illo? Odit in esse nulla aut reiciendis et, nostrum ab, quam porro vel maiores at cupiditate suscipit impedit enim
-      labore. Laudantium deserunt maxime perspiciatis enim nemo omnis veniam suscipit impedit, cum recusandae harum in
-      unde eligendi culpa?
+      illo? Odit in esse nulla aut reiciendis et, nostrum ab, quam porro vel maiores at cupiditat
     </p>
     <div class="shopping">
       <button [ngClass]="{active: toggle}" (click)="addToCart()">
@@ -39,8 +38,8 @@
     <h1>Total</h1>
     <h1>{{ currentProduct.price * currentProduct.quantity }}</h1>
    </div>
-  <button (click) = "addToCart()" class="confirm" id = "open-modal">
+  <button (click) = "checkOut()" class="confirm" id = "open-modal">
     Go To Checkout
   </button>
 </div>
-<app-cart-modal></app-cart-modal>
+<!-- <app-cart-modal></app-cart-modal> -->

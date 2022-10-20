@@ -47,6 +47,18 @@ const routes: Routes = [
   {
     path: 'fav',
     loadChildren: () => import('./pages/fav/fav.module').then( m => m.FavPageModule)
+  },
+  {
+    path: 'user',
+    loadChildren: () => import('./pages/user/user.module').then( m => m.UserPageModule)
+  },
+  {
+    path: 'orderlist',
+    loadChildren: () => import('./pages/orderlist/orderlist.module').then( m => m.OrderlistPageModule)
+  },
+  {
+    path: 'order',
+    loadChildren: () => import('./pages/order/order.module').then( m => m.OrderPageModule)
   }
 ];
 

@@ -4,12 +4,14 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BackButtonComponent } from 'src/app/components/back-button/back-button.component';
 import { CartModalComponent } from 'src/app/components/cart-modal/cart-modal.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { DetailsPageRoutingModule } from './details-routing.module';
+
+import { HeaderComponent } from 'src/app/components/header/header.component';
+import { BackButtonComponent } from 'src/app/components/back-button/back-button.component';
 
 
 import { DetailsPage } from './details.page';
@@ -22,7 +24,7 @@ import { DetailsPage } from './details.page';
     DetailsPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [DetailsPage , BackButtonComponent,
+  declarations: [DetailsPage , BackButtonComponent,HeaderComponent,
   CartModalComponent]
 })
 export class DetailsPageModule {}

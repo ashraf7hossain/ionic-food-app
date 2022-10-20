@@ -15,5 +15,25 @@ export class FavPage implements OnInit {
       this.fav = res;
     });
   }
+  startX:number;
+  startY:number;
+
+  movingX:number;
+  movingY:number;
+
+  swipestart(e:TouchEvent){
+    this.startX = e.touches[0].clientX;
+    this.startY = e.touches[0].clientY;
+  }
+  swiping(e: TouchEvent){
+    this.movingX = e.touches[0].clientX;
+    this.movingY = e.touches[0].clientY;
+  }
+  swipeend(e:TouchEvent, item:any){
+    if(this.startX + 100 < this.movingX || this.startX - 100 > this.movingX){
+      this.prd.removeFromFav(item);
+      return;
+    }
+  }
 
 }

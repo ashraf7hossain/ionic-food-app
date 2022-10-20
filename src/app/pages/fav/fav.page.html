@@ -1,18 +1,18 @@
-<app-header></app-header>
+<app-header title = "Your Favorites"></app-header>
 <app-back-button></app-back-button>
 
 
 <!-- products section -->
 <ion-content>
-  <h1 style="text-align: center;"> Your Favorites </h1>
   <ion-grid>
     <ion-row>
       <ng-container *ngIf="fav.length > 0; else otherwise">
         <ng-container *ngFor="let product of fav">
-          <ion-col size="6">
-            <img [routerLink]="['/details']" [queryParams]="{'id' : product.id}" class="card-img" [src]="product.img">
+          <ion-col (touchstart) = "swipestart($event)" (touchmove)="swiping($event)"  (touchend) = "swipeend($event, product)" size="6">
+            <img class="card-img" [src]="product.img">
             <h5> {{ product.name }} </h5>
             <h5> {{ product.price }} </h5>
+            <app-input [product] = "product" icon = "heart"></app-input>
           </ion-col>
         </ng-container>
       </ng-container>

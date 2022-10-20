@@ -4,22 +4,20 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavPageRoutingModule } from './fav-routing.module';
-
-import { FavPage } from './fav.page';
-
 import { HeaderComponent } from 'src/app/components/header/header.component';
 import { BackButtonComponent } from 'src/app/components/back-button/back-button.component';
-import { InputComponent } from 'src/app/components/input/input.component';
+
+import { UserPageRoutingModule } from './user-routing.module';
+
+import { UserPage } from './user.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavPageRoutingModule
+    UserPageRoutingModule
   ],
-  declarations: [FavPage,HeaderComponent,BackButtonComponent,
-  InputComponent]
+  declarations: [UserPage,HeaderComponent,BackButtonComponent]
 })
-export class FavPageModule {}
+export class UserPageModule {}

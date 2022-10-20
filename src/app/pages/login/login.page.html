@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header title = "Login"></app-header>
 <app-back-button></app-back-button>
 
 <ion-content class="ion-padding">
@@ -11,9 +11,7 @@
         </h3>
 
         <div class="login-section">
-            <h1 *ngIf="wrong">
-                wrong credentials
-            </h1>
+            
             <form [formGroup]="loginForm" action="" (ngSubmit)="login()">
                 <div class="form-field">
                     <label [ngClass]="focused[0] ? 'label-focused' : '' " for="">
@@ -29,6 +27,9 @@
                     <input formControlName="lpassword" type="password" (focus)="focused[1] = true"
                         (blur)="onFocused($event,1)">
                 </div>
+                <p *ngIf="wrong" style="color: red;">
+                    wrong credentials
+                </p>
                 <div class="action-button ion-padding">
                     <ion-button [disabled]="!loginForm.valid" type="submit" size="large" class="login-button">Login
                     </ion-button>

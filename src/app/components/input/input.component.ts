@@ -10,13 +10,18 @@ export class InputComponent implements OnInit {
 
   @Input() product: any;
   @Input() type = 'text';
+  @Input() icon:string;
 
   focused: boolean;
   heart: string = "heart-outline";
 
   constructor(private prd : ProductService) { }
-
-  ngOnInit() {}
+  favs:any[] = [];
+  ngOnInit() {
+    this.prd.currentFavorite.subscribe(res => {
+      this.favs = res;
+    })
+  }
 
   onFocused(event:any){
     const val = event.target.value;
@@ -25,12 +30,12 @@ export class InputComponent implements OnInit {
     }
   }
   addToFav(item:any){
-    if(this.heart === 'heart-outline'){
-      this.heart = 'heart';
+    this.prd.addToFav(this.product);
+    if(this.favs.includes(this.product)){
+      this.heart = "heart";
     }else{
-      this.heart = 'heart-outline';
+      this.heart = "heart-outline"
     }
-    this.prd.addToFav(item);
   }
 
 }

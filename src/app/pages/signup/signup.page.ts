@@ -7,6 +7,8 @@ import { finalize } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { ToastController } from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 
 
@@ -18,32 +20,36 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./signup.page.scss'],
 })
 export class SignupPage implements OnInit {
-  signForm : FormGroup = new FormGroup({});
-  selected: File ;
+  signForm: FormGroup = new FormGroup({});
+  selected: File;
   downloadURL: any;
   mail: string = "";
-  validMail:any;
+  validMail: any;
+  focused: boolean[] = [];
+  loading: any;
   constructor(private storage: AngularFireStorage,
-              private http: HttpClient,
-              private toast: ToastController) { }
+    private http: HttpClient,
+    private router: Router,
+    private toast: ToastController,
+    private loadingCtrl: LoadingController) { }
 
   ngOnInit() {
     this.signForm = new FormGroup({
-      sname : new FormControl('',[Validators.required]),
-      semail : new FormControl('',[Validators.required,Validators.email]),
-      spassword : new FormControl('',[Validators.required ]),
-      svpassword : new FormControl('',[Validators.required]),
+      sname: new FormControl('', [Validators.required]),
+      semail: new FormControl('', [Validators.required, Validators.email]),
+      spassword: new FormControl('', [Validators.required]),
+      svpassword: new FormControl('', [Validators.required]),
     })
   }
-  getSelected(event):void{
+  getSelected(event): void {
     this.selected = event.target.files[0];
-    
+
   }
-  get getForm(){
+  get getForm() {
     return this.signForm.controls;
   }
 
-  async presentToast(position: 'top' , message){
+  async presentToast(position: 'top', message) {
     const tst = await this.toast.create({
       message: message,
       duration: 1500,
@@ -51,16 +57,22 @@ export class SignupPage implements OnInit {
     });
     await tst.present();
   }
+  async showLoading(){
+    this.loading = await this.loadingCtrl.create({
+      message: 'Uploading...',
+    });
+    this.loading.present();
+  }
 
-  signUp(){
+  signUp() {
     const filePath = this.selected['name'];
     const fileRef = this.storage.ref(filePath);
-    const task = this.storage.upload(filePath,this.selected);
+    const task = this.storage.upload(filePath, this.selected);
 
     let userData = {
-      name : this.signForm.value['sname'],
-      email : this.signForm.value['semail'],
-      password : this.signForm.value['spassword'],
+      name: this.signForm.value['sname'],
+      email: this.signForm.value['semail'],
+      password: this.signForm.value['spassword'],
       role: "user",
       status: "active",
       img: ""
@@ -68,17 +80,29 @@ export class SignupPage implements OnInit {
 
 
     task.snapshotChanges().pipe(
-      finalize(() => {
+      finalize(async() => {
+
+        await this.showLoading();
+
         fileRef.getDownloadURL().subscribe(res => {
-          userData = {...userData , img: res};
-          this.http.post(`${environment.baseURL}/users.json`,userData).subscribe(async res2 => {
-            await this.presentToast('top',"Sign Up Successfull");
+          userData = { ...userData, img: res };
+          this.http.post(`${environment.baseURL}/users.json`, userData).subscribe(async res2 => {
+            // this.loading.dismsiss();
+            this.loadingCtrl.dismiss();
+            await this.presentToast('top', "Sign Up Successfull");
+            this.router.navigate(['login']);
           });
         });
-      } )
-   )
-  .subscribe();
-    
+      })
+    )
+      .subscribe();
+
   }
-  
+  onFocused(event: any, id: number) {
+    const val = event.target.value;
+    if (!val) {
+      this.focused[id] = false;
+    }
+  }
+
 }

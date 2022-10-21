@@ -85,6 +85,13 @@ export class CartPage implements OnInit,OnDestroy {
     });
     await tst.present();
   }
+
+  goto(){
+    this.success = false;
+    setTimeout(() => {
+      this.route.navigate(['home']);
+    }, 1);
+  }
   orderSubmit(){
     // await this.presentToast('top' , "Order Succesfully placed");
     // this.orderForm.reset();
@@ -104,7 +111,7 @@ export class CartPage implements OnInit,OnDestroy {
     }
     this.auth.registerOrder(order);
     this.prd.getAllOrders();
-    console.log(order);
+    this.prd.clearCart();
     this.isModalOpen = false;
     this.isPaymentOpen = false;
     this.success = true;

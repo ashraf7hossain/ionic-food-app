@@ -8,7 +8,7 @@
         <ion-menu-button color = "light" slot = "start" menu="main-menu"></ion-menu-button>
           <ion-icon *ngIf = "!currentUser.hasOwnProperty('img')" style="font-size: 42px;" name = "person-circle" slot = "end"></ion-icon>
           <ion-avatar slot = "end" *ngIf = "currentUser.hasOwnProperty('img')">
-            <ion-img [src]="currentUser.img"></ion-img>
+            <img [src]="currentUser.img"/>
           </ion-avatar>
       <!-- </ion-button> -->
     </ion-toolbar>

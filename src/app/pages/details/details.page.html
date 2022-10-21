@@ -23,7 +23,7 @@
 </ion-content>
 <div class="modal-backdrop" [ngClass]="{active: buynow}"></div>
 <div class="buynow-modal" [ngClass]="{active: buynow}">
-  <ion-icon name="close-outline" (click)="buyNow()"></ion-icon>
+  <ion-icon name="close-outline" (click)="closeNow()"></ion-icon>
   <div class="buynow-details">
     <h3>
       {{ currentProduct.name }}

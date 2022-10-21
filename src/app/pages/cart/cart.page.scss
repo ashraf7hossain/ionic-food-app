@@ -139,7 +139,13 @@ input:focus {
     }
   
 }
-
+ion-toolbar{
+    --background: #ff7465;
+    // color: white;
+    ion-icon{
+        color: black;
+    }
+}
 .btn-lg {
     // width: 100%;
     border-radius: 50px;

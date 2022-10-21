@@ -19,8 +19,8 @@ export class LoginPage implements OnInit {
   
   ngOnInit() {
     this.loginForm = new FormGroup({
-      lemail: new FormControl('',[Validators.required]),
-      lpassword: new FormControl('',[Validators.required])
+      lemail: new FormControl('messi@gmail.com',[Validators.required]),
+      lpassword: new FormControl('012345678',[Validators.required])
     })
     this._auth.getAllUsers();
   }

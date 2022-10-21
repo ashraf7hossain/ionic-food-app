@@ -11,45 +11,44 @@
             </div>
     
             <form [formGroup]="signForm" class="login-form ion-padding" (ngSubmit)="signUp()">
-                <div class="form-input">
-                    <ion-item>
-                        <ion-label position="floating">
-                            Name
-                        </ion-label>
-                        <ion-input formControlName="sname" type="text"></ion-input>
-                    </ion-item>
+                <div class="form-field">
+                    <label [ngClass]="focused[0] ? 'label-focused' : '' " for="">
+                        name
+                    </label>
+                    <input formControlName="sname" type="text" (focus)="focused[0] = true"
+                        (blur)="onFocused($event,0)">
                 </div>
-                <div class="form-input">
-                    <ion-item>
-                        <ion-label position="floating">
-                            Email
-                        </ion-label>
-                        <ion-input formControlName="semail" type="email"></ion-input>
-                    </ion-item>
-                    <p class="warning" *ngIf = "getForm.semail.touched && getForm.semail.errors">
-                       Invalid Email
-                    </p>
-    
+                <p class="warning" *ngIf = "getForm.sname.value === '' && getForm.sname.touched">Name is required</p>
+                
+                <div class="form-field">
+                    <label [ngClass]="focused[1] ? 'label-focused' : '' " for="">
+                        Email
+                    </label>
+                    <input formControlName="semail" type="email" (focus)="focused[1] = true"
+                        (blur)="onFocused($event,1)">
                 </div>
-                <div class="form-input">
-                    <ion-item>
-                        <ion-label position="floating">
-                            Password
-                        </ion-label>
-                        <ion-input formControlName="spassword" type="password"></ion-input>
-                    </ion-item>
+
+                <p class="warning" *ngIf = "getForm.semail.value === '' && getForm.semail.touched" >Email is required</p>
+                <p class="warning" *ngIf = "!getForm.semail.valid && getForm.semail.value !=='' " >Email is invalid</p>
+
+                <div class="form-field">
+                    <label [ngClass]="focused[2] ? 'label-focused' : '' " for="">
+                        Password
+                    </label>
+                    <input formControlName="spassword" type="password" (focus)="focused[2] = true"
+                        (blur)="onFocused($event,2)">
                 </div>
-                <div class="form-input">
-                    <ion-item>
-                        <ion-label position="floating">
+                <div class="form-field">          
+                        <label [ngClass]="focused[3] ? 'label-focused' : '' " for="">
                             Verify Password
-                        </ion-label>
-                        <ion-input formControlName="svpassword" type="password"></ion-input>
-                    </ion-item>
-                    <p class="warning" *ngIf = "getForm.spassword.value !== getForm.svpassword.value && getForm.svpassword.touched && getForm.svpassword !== '' ">
-                        Password doesn't match
-                    </p>
-                </div>
+                        </label>
+                        <input formControlName="svpassword" type="password" (focus)="focused[3] = true"
+                            (blur)="onFocused($event,3)">
+                 
+                        </div>
+                        <p class="warning" *ngIf = "getForm.spassword.value !== getForm.svpassword.value && getForm.svpassword.touched && getForm.svpassword.value !== '' ">
+                            Password doesn't match
+                        </p>
                 <div style="display: flex; flex-direction:column;">
                     <ion-label>Choose Your Profile Picture</ion-label>
                     <ion-input type="file" (change)="getSelected($event)"></ion-input>

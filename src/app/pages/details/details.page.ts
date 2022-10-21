@@ -39,13 +39,20 @@ export class DetailsPage implements OnInit {
   }
   checkOut(){
     this.prd.addToCart(this.currentProduct);
+    let val = this.currentProduct.quantity;
+    this.prd.replaceQuantity(this.currentProduct,);
+
     this.router.navigate(['cart']);
   }
   buyNow(){
-    this.buynow = !this.buynow;
+    this.buynow = true;
+  }
+  closeNow(){
+    this.buynow = false;
   }
   changeQuantity(val:number){
-    this.prd.changeQuantity(this.currentProduct,val);
+    this.currentProduct.quantity += val;
+    // this.prd.changeQuantity(this.currentProduct,val);
   }
 
 }

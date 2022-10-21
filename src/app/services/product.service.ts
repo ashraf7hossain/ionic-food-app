@@ -47,16 +47,33 @@ export class ProductService {
       temp = res;
     });
     if (product.quantity === 1 && value === -1) {
-      this.tempCount += value;
-      this.cartCount.next(this.tempCount);
       temp = temp.filter(c => c.id !== product.id);
+      this.tempCount = temp.reduce((a,b) => (a + b.quantity),0);
+      this.cartCount.next(this.tempCount);
       this.cart.next(temp);
       return;
     }
     product.quantity += value;
-    this.tempCount += value;
-
+    this.tempCount = temp.reduce((a,b)=>(a + b.quantity),0);
     this.cartCount.next(this.tempCount);
+  }
+  
+  replaceQuantity(product:any){
+    let temp: any[] = [];
+    this.currentCart.subscribe(res => {
+      temp = res;
+    });
+    for(let x of temp){
+      if(x.id === product.id){
+        x = product;      
+      }
+    }
+    this.tempCount = temp.reduce((a,b)=>(a + b.quantity),0);
+    this.cartCount.next(this.tempCount);
+  }
+  clearCart(){
+    this.cart.next([]);
+    this.cartCount.next(0);
   }
 
 
